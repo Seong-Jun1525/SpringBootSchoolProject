@@ -23,6 +23,10 @@ public class StudentService {
         student.setStudentRegistrationDate(LocalDate.now());
         return studentRepository.save(student);
     }
+    
+    public Optional<Student> login(String email, String password) {
+        return studentRepository.findByStudentEmailAndStudentPw(email, password);
+    }
 
     public Student updateStudent(Student student) {
         Optional<Student> existingStudentOpt = studentRepository.findByStudentNumberAndStudentMajor(
@@ -42,6 +46,8 @@ public class StudentService {
             throw new StudentNotFoundException("Student not found with number: " + student.getStudentNumber());
         }
     }
+    
+    
 
     public List<Student> findAll() {
         return studentRepository.findAll();

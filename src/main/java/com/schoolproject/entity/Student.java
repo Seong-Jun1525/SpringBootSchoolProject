@@ -1,6 +1,7 @@
 package com.schoolproject.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,104 +20,132 @@ public class Student {
     private String studentName;
     
     @Column(name = "student_number")
-    private String studentNumber;
+    private Integer studentNumber;
     
     @Column(name = "student_major")
     private String studentMajor;
-    
+
     @Column(name = "student_grade")
     private Integer studentGrade;
     
     @Column(name = "student_class")
-    private String studentClass;
+    private Integer studentClass;
+    
+    @Column(name = "student_email")
+    private String studentEmail;
+
+    @Column(name = "student_pw")
+    private String studentPw;
+    
+    @Column(name = "student_birthdate")
+    private String studentBirthdate;
+    
+    @Column(name = "student_phone")
+    private Integer studentPhone;
     
     @Column(name = "student_gender")
     private String studentGender;
     
-    @Column(name = "student_email")
-    private String studentEmail;
-    
-    @Column(name = "student_pw")
-    private String studentPw;
-    
     @Column(name = "student_point")
     private Integer studentPoint;
     
-    @Column(name = "student_phone")
-    private String studentPhone; // 추후 int로 수정하기
-    
-    @Column(name = "student_birthdate")
-    private LocalDate studentBirthdate;
-    
     @Column(name = "student_registration_date")
     private LocalDate studentRegistrationDate;
-    
-    // Getters and Setters
-    public Long getStudentId() {
-        return studentId;
-    }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
+	public Long getStudentId() {
+		return studentId;
+	}
 
-    public String getStudentName() {
-        return studentName;
-    }
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
+	public String getStudentName() {
+		return studentName;
+	}
 
-    public String getStudentNumber() {
-        return studentNumber;
-    }
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
 
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
-    }
+	public Integer getStudentNumber() {
+		return studentNumber;
+	}
 
-    public String getStudentMajor() {
-        return studentMajor;
-    }
+	public void setStudentNumber(Integer studentNumber) {
+		this.studentNumber = studentNumber;
+	}
 
-    public void setStudentMajor(String studentMajor) {
-        this.studentMajor = studentMajor;
-    }
+	public String getStudentMajor() {
+		return studentMajor;
+	}
 
-    public Integer getStudentGrade() {
-        return studentGrade;
-    }
+	public void setStudentMajor(String studentMajor) {
+		this.studentMajor = studentMajor;
+	}
 
-    public void setStudentGrade(Integer studentGrade) {
-        this.studentGrade = studentGrade;
-    }
+	public Integer getStudentGrade() {
+		return studentGrade;
+	}
 
-    public String getStudentClass() {
-        return studentClass;
-    }
+	public void setStudentGrade(Integer studentGrade) {
+		this.studentGrade = studentGrade;
+	}
 
-    public void setStudentClass(String studentClass) {
-        this.studentClass = studentClass;
-    }
+	public String getStudentEmail() {
+		return studentEmail;
+	}
 
-    public String getStudentGender() {
-        return studentGender;
-    }
+	public void setStudentEmail(String studentEmail) {
+		this.studentEmail = studentEmail;
+	}
 
-    public void setStudentGender(String studentGender) {
-        this.studentGender = studentGender;
-    }
+	public void setStudentPassword(String studentPw) {
+		this.studentPw = studentPw;
+	}
 
-    public String getStudentEmail() {
-        return studentEmail;
-    }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
-    }
+	public Integer getStudentPhone() {
+		return studentPhone;
+	}
 
-    public String getStudentPw() {
+	public void setStudentPhone(Integer studentPhone) {
+		this.studentPhone = studentPhone;
+	}
+
+	public Integer getStudentPoint() {
+		return studentPoint;
+	}
+
+	public void setStudentPoint(Integer studentPoint) {
+		this.studentPoint = studentPoint;
+	}
+
+	public LocalDate getStudentRegistrationDate() {
+		return studentRegistrationDate;
+	}
+
+	public void setStudentRegistrationDate(LocalDate localDate) {
+		this.studentRegistrationDate = localDate;
+	}
+
+	public String getStudentGender() {
+		return studentGender;
+	}
+
+	public void setStudentGender(String studentGender) {
+		this.studentGender = studentGender;
+	}
+
+	public Integer getStudentClass() {
+		return studentClass;
+	}
+
+	public void setStudentClass(Integer studentClass) {
+		this.studentClass = studentClass;
+	}
+
+	public String getStudentPw() {
 		return studentPw;
 	}
 
@@ -124,35 +153,21 @@ public class Student {
 		this.studentPw = studentPw;
 	}
 
-	public Integer getStudentPoint() {
-        return studentPoint;
-    }
+	public String getStudentBirthdate() {
+		return studentBirthdate;
+	}
 
-    public void setStudentPoint(Integer studentPoint) {
-        this.studentPoint = studentPoint;
-    }
+	public void setStudentBirthdate(String studentBirthdate) {
+		this.studentBirthdate = studentBirthdate;
+	}
 
-    public String getStudentPhone() {
-        return studentPhone;
-    }
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentNumber=" + studentNumber
+				+ ", studentMajor=" + studentMajor + ", studentGrade=" + studentGrade + ", studentClass=" + studentClass
+				+ ", studentEmail=" + studentEmail + ", studentPw=" + studentPw + ", studentBirthdate="
+				+ studentBirthdate + ", studentPhone=" + studentPhone + ", studentGender=" + studentGender
+				+ ", studentPoint=" + studentPoint + ", studentRegistrationDate=" + studentRegistrationDate + "]";
+	}
 
-    public void setStudentPhone(String studentPhone) {
-        this.studentPhone = studentPhone;
-    }
-
-    public LocalDate getStudentBirthdate() {
-        return studentBirthdate;
-    }
-
-    public void setStudentBirthdate(LocalDate studentBirthdate) {
-        this.studentBirthdate = studentBirthdate;
-    }
-
-    public LocalDate getStudentRegistrationDate() {
-        return studentRegistrationDate;
-    }
-
-    public void setStudentRegistrationDate(LocalDate studentRegistrationDate) {
-        this.studentRegistrationDate = studentRegistrationDate;
-    }
 }
