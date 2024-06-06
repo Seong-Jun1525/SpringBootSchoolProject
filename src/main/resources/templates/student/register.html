@@ -15,7 +15,7 @@
         <form th:action="@{/students/update}" th:object="${student}" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="studentNumber" class="form-label">Student Number:</label>
-                <input type="text" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
+                <input type="number" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
                 <div class="invalid-feedback">
                     Please enter the student number.
                 </div>
@@ -54,10 +54,10 @@
                 <div class="invalid-feedback">
                     Please enter a password.
                 </div>
-            </div>
+            </div> <!-- 핸드폰으로 문자 오게 연동? 수정 -->
             <div class="mb-3">
                 <label for="studentPhone" class="form-label">Phone:</label>
-                <input type="text" class="form-control" id="studentPhone" th:field="*{studentPhone}" required/>
+                <input type="number" class="form-control" id="studentPhone" th:field="*{studentPhone}" required/>
                 <div class="invalid-feedback">
                     Please enter a phone number.
                 </div>

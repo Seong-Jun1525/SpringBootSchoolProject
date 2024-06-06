@@ -15,7 +15,7 @@
         <form th:action="@{/students/register}" th:object="${student}" method="post">
             <div class="form-group">
                 <label for="studentNumber">Student Number:</label>
-                <input type="text" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
+                <input type="number" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
             </div>
             <div class="form-group">
                 <label for="studentMajor">Major:</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="studentClass">Class:</label>
-                <input type="text" class="form-control" id="studentClass" th:field="*{studentClass}" required/>
+                <input type="number" class="form-control" id="studentClass" th:field="*{studentClass}" required/>
             </div>
             <div class="form-group">
                 <label for="studentPoint">Points:</label>
