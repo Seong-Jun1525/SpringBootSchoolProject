@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="container mt-4">
+		<h1>Student List</h1>
+	    <table class="table table-striped table-hover">
+	        <thead class="table-success">
+	            <tr>
+	                <th>ID</th>
+	                <th>Name</th>
+	                <th>Number</th>
+	                <th>Major</th>
+	                <th>Grade</th>
+	                <th>Class</th>
+	                <th>Gender</th>
+	                <th>Email</th>
+	                <th>Pw</th>
+	                <th>Points</th>
+	                <th>Phone</th>
+	                <th>Birthdate</th>
+	                <th>Registration Date</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="student : ${students}">
+	                <td th:text="${student.studentId}">1</td>
+	                <td th:text="${student.studentName}">John Doe</td>
+	                <td th:text="${student.studentNumber}">20230001</td>
+	                <td th:text="${student.studentMajor}">Computer Science</td>
+	                <td th:text="${student.studentGrade}">1</td>
+	                <td th:text="${student.studentClass}">A</td>
+	                <td th:text="${student.studentGender}">Male</td>
+	                <td th:text="${student.studentEmail}">john.doe@example.com</td>
+	                <td th:text="${student.studentPw}">password</td>
+	                <td th:text="${student.studentPoint}">100</td>
+	                <td th:text="${student.studentPhone}">123-456-7890</td>
+	                <td th:text="${student.studentBirthdate}">2000-01-01</td>
+	                <td th:text="${student.studentRegistrationDate}">2024-01-01</td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+</html>

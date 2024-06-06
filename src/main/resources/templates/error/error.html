@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var errorMessage = "[[${errorMessage}]]"; // errorMessage 변수를 Thymeleaf 템플릿으로 변경
+            alert(errorMessage);
+            window.location.href = "/";
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

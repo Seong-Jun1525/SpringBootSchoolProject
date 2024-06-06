@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div  class="container mt-4">
+		<h1>교수목록</h1>
+	    <table class="table table-striped table-hover">
+	        <thead class="table-success">
+	            <tr>
+	                <th>ID</th>
+	                <th>Name</th>
+	                <th>Dept</th>
+	                <th>Email</th>
+	                <th>Pw</th>
+	                <th>Phone</th>
+	                <th>Registration Date</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="professor : ${professors}">
+	                <td th:text="${professor.professorId}">1</td>
+	                <td th:text="${professor.professorName}">John Doe</td>
+	                <td th:text="${professor.professorDept}">Computer Science</td>
+	                <td th:text="${professor.professorEmail}">john.doe@example.com</td>
+	                <td th:text="${professor.professorPw}">password</td>
+	                <td th:text="${professor.professorPhone}">123-456-7890</td>
+	                <td th:text="${professor.professorRegistrationDate}">2024-01-01</td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+</html>

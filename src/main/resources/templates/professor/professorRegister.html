@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>교수등록</title>
+    <style>
+        .custom-container {
+            max-width: 500px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-sm custom-container mt-5">
+	    <h1>교수등록</h1>
+	    <form th:action="@{/professors/register}" th:object="${professor}" method="post">
+	        <div class="form-group">
+	            <label for="professorDept">Dept:</label>
+	            <input type="text" class="form-control" id="professorDept" th:field="*{professorDept}" required/>
+	        </div>
+	        <div class="form-group">
+	            <label for="professorName">Name:</label>
+	            <input type="text" class="form-control" id="professorName" th:field="*{professorName}" required/>
+	        </div>
+	        <div class="form-group">
+	            <label for="professorEmail">Email:</label>
+	            <input type="email" class="form-control" id="professorEmail" th:field="*{professorEmail}" required/>
+	        </div>
+	        <div class="form-group">
+	            <label for="professorPw">Pw:</label>
+	            <input type="password" class="form-control" id="professorPw" th:field="*{professorPw}" required/>
+	        </div>
+	        <div class="form-group">
+	            <label for="professorPhone">Phone:</label>
+	            <input type="text" class="form-control" id="professorPhone" th:field="*{professorPhone}" required/>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Register</button>
+	    </form>
+	</div>
+
+</body>
+</html>

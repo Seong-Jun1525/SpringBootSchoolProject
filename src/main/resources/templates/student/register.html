@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Complete Registration</title>
+    <style>
+        .custom-container {
+            max-width: 500px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-sm custom-container mt-5">
+        <h1>회원가입</h1>
+        <form th:action="@{/students/update}" th:object="${student}" method="post" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="studentNumber" class="form-label">Student Number:</label>
+                <input type="text" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
+                <div class="invalid-feedback">
+                    Please enter the student number.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentMajor" class="form-label">Major:</label>
+                <input type="text" class="form-control" id="studentMajor" th:field="*{studentMajor}" required/>
+                <div class="invalid-feedback">
+                    Please enter the major.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentName" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="studentName" th:field="*{studentName}" required/>
+                <div class="invalid-feedback">
+                    Please enter the name.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentGender" class="form-label">Gender:</label>
+                <input type="text" class="form-control" id="studentGender" th:field="*{studentGender}" required/>
+                <div class="invalid-feedback">
+                    Please enter the gender.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentEmail" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="studentEmail" th:field="*{studentEmail}" required/>
+                <div class="invalid-feedback">
+                    Please enter a valid email address.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentPw" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="studentPw" th:field="*{studentPw}" required/>
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentPhone" class="form-label">Phone:</label>
+                <input type="text" class="form-control" id="studentPhone" th:field="*{studentPhone}" required/>
+                <div class="invalid-feedback">
+                    Please enter a phone number.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="studentBirthdate" class="form-label">Birthdate:</label>
+                <input type="date" class="form-control" id="studentBirthdate" th:field="*{studentBirthdate}" required/>
+                <div class="invalid-feedback">
+                    Please enter a birthdate.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Complete Registration</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        (function () {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>
