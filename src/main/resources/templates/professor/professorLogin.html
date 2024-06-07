@@ -12,18 +12,18 @@
 </head>
 <body>
     <div class="container-sm custom-container mt-5">
-        <h1>로그인</h1>
-        <form th:action="@{/login}" method="post" class="needs-validation" novalidate>
+        <h1>교수 로그인</h1>
+        <form th:action="@{/professors/login}" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" th:field="*{studentEmail}" required/>
+                <label for="professorEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="professorEmail" th:field="*{professorEmail}" required/>
                 <div class="invalid-feedback">
                     이메일을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">패스워드</label>
-                <input type="password" class="form-control" id="inputPassword" th:field="*{studentPw}" required/>
+                <label for="professorPw" class="form-label">패스워드</label>
+                <input type="password" class="form-control" id="professorPw" th:field="*{professorPw}" required/>
                 <div class="invalid-feedback">
                     패스워드를 입력하세요.
                 </div>
@@ -53,4 +53,3 @@
     </script>
 </body>
 </html>
-

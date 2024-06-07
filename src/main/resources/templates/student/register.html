@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Complete Registration</title>
+    <title>회원가입</title>
     <style>
         .custom-container {
             max-width: 500px;
@@ -14,62 +14,62 @@
         <h1>회원가입</h1>
         <form th:action="@{/students/update}" th:object="${student}" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
-                <label for="studentNumber" class="form-label">Student Number:</label>
+                <label for="studentNumber" class="form-label">학번</label>
                 <input type="number" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
                 <div class="invalid-feedback">
-                    Please enter the student number.
+                    학번을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
                 <label for="studentMajor" class="form-label">Major:</label>
                 <input type="text" class="form-control" id="studentMajor" th:field="*{studentMajor}" required/>
                 <div class="invalid-feedback">
-                    Please enter the major.
+                    전공을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="studentName" class="form-label">Name:</label>
+                <label for="studentName" class="form-label">이름</label>
                 <input type="text" class="form-control" id="studentName" th:field="*{studentName}" required/>
                 <div class="invalid-feedback">
-                    Please enter the name.
+                    이름을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="studentGender" class="form-label">Gender:</label>
+                <label for="studentGender" class="form-label">성별</label>
                 <input type="text" class="form-control" id="studentGender" th:field="*{studentGender}" required/>
                 <div class="invalid-feedback">
-                    Please enter the gender.
+                    성별을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="studentEmail" class="form-label">Email:</label>
+                <label for="studentEmail" class="form-label">Email</label>
                 <input type="email" class="form-control" id="studentEmail" th:field="*{studentEmail}" required/>
                 <div class="invalid-feedback">
-                    Please enter a valid email address.
+                    Email을 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="studentPw" class="form-label">Password:</label>
+                <label for="studentPw" class="form-label">패스워드</label>
                 <input type="password" class="form-control" id="studentPw" th:field="*{studentPw}" required/>
                 <div class="invalid-feedback">
-                    Please enter a password.
+                    패스워드를 입력하세요.
                 </div>
             </div> <!-- 핸드폰으로 문자 오게 연동? 수정 -->
             <div class="mb-3">
-                <label for="studentPhone" class="form-label">Phone:</label>
-                <input type="number" class="form-control" id="studentPhone" th:field="*{studentPhone}" required/>
+                <label for="studentPhone" class="form-label">핸드폰</label>
+                <input type="text" class="form-control" id="studentPhone" th:field="*{studentPhone}" required/>
                 <div class="invalid-feedback">
-                    Please enter a phone number.
+                    핸드폰번호를 입력하세요.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="studentBirthdate" class="form-label">Birthdate:</label>
+                <label for="studentBirthdate" class="form-label">생년월일</label>
                 <input type="date" class="form-control" id="studentBirthdate" th:field="*{studentBirthdate}" required/>
                 <div class="invalid-feedback">
-                    Please enter a birthdate.
+                    생년월일을 입력하세요.
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Complete Registration</button>
+            <button type="submit" class="btn btn-primary">회원가입</button>
         </form>
     </div>
 

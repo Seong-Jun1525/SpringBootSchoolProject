@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.schoolproject.entity.Student;
+import com.schoolproject.exception.AlreadyExistsStudentException;
 import com.schoolproject.exception.StudentNotFoundException;
 import com.schoolproject.repository.StudentRepository;
 
@@ -20,9 +21,36 @@ public class StudentService {
     }
 
     public Student registerStudent(Student student) {
-        student.setStudentRegistrationDate(LocalDate.now());
+    	// Check if student_number already exists
+        if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
+            throw new AlreadyExistsStudentException("이미 존재하는 학번입니다.");
+        }
+        
+        if (student.getStudentName() == null) {
+            student.setStudentName("");
+        }
+        if (student.getStudentEmail() == null) {
+            student.setStudentEmail("");
+        }
+        if (student.getStudentPw() == null) {
+            student.setStudentPw("");
+        }
+        if (student.getStudentBirthdate() == null) {
+            student.setStudentBirthdate("");
+        }
+        if (student.getStudentPhone() == null) {
+            student.setStudentPhone("");
+        }
+        if (student.getStudentGender() == null) {
+            student.setStudentGender("");
+        }
+        if (student.getStudentRegistrationDate() == null) {
+            student.setStudentRegistrationDate(LocalDate.now());
+        }
+
         return studentRepository.save(student);
     }
+
     
     public Optional<Student> login(String email, String password) {
         return studentRepository.findByStudentEmailAndStudentPw(email, password);

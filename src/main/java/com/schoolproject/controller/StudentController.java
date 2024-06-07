@@ -33,7 +33,7 @@ public class StudentController {
             studentService.registerStudent(student);
             return "redirect:/";
         } catch (Exception e) {
-            return "redirect:/error";
+        	throw new StudentNotFoundException("Error : " + e.getMessage());
         }
     }
 
@@ -68,8 +68,6 @@ public class StudentController {
     
     @PostMapping("/login")
     public String login(@ModelAttribute Student student, Model model) {
-    	
-    	
         String email = student.getStudentEmail();
         String password = student.getStudentPw();
 

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<div class="container mt-4">
-		<h1>Student List</h1>
+		<h1>학생목록</h1>
 	    <table class="table table-striped table-hover">
 	        <thead class="table-success">
 	            <tr>
-	                <th>ID</th>
-	                <th>Name</th>
-	                <th>Number</th>
-	                <th>Major</th>
-	                <th>Grade</th>
-	                <th>Class</th>
-	                <th>Gender</th>
+	                <th>Num</th>
+	                <th>이름</th>
+	                <th>학번</th>
+	                <th>전공</th>
+	                <th>학년</th>
+	                <th>반</th>
+	                <th>성별</th>
 	                <th>Email</th>
 	                <th>Pw</th>
-	                <th>Points</th>
-	                <th>Phone</th>
-	                <th>Birthdate</th>
-	                <th>Registration Date</th>
+	                <th>포인트</th>
+	                <th>핸드폰</th>
+	                <th>생년월일</th>
+	                <th>가입날짜</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -32,7 +32,7 @@
 	                <td th:text="${student.studentEmail}">john.doe@example.com</td>
 	                <td th:text="${student.studentPw}">password</td>
 	                <td th:text="${student.studentPoint}">100</td>
-	                <td th:text="${student.studentPhone}">123-456-7890</td>
+	                <td th:text="${student.studentPhone}">010-1456-7890</td>
 	                <td th:text="${student.studentBirthdate}">2000-01-01</td>
 	                <td th:text="${student.studentRegistrationDate}">2024-01-01</td>
 	            </tr>

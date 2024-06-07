@@ -13,4 +13,18 @@ public class GlobalExceptionHandler {
         modelAndView.addObject("errorMessage", ex.getMessage());
         return modelAndView;
     }
+    
+    @ExceptionHandler(AlreadyExistsStudentException.class)
+    public ModelAndView handleStudentNotFoundException(AlreadyExistsStudentException ex) {
+        ModelAndView modelAndView = new ModelAndView("error/error");
+        modelAndView.addObject("errorMessage", ex.getMessage());
+        return modelAndView;
+    }
+    
+    @ExceptionHandler(ProfessorLoginException.class)
+    public ModelAndView handleStudentNotFoundException(ProfessorLoginException ex) {
+        ModelAndView modelAndView = new ModelAndView("error/error");
+        modelAndView.addObject("errorMessage", ex.getMessage());
+        return modelAndView;
+    }
 }

@@ -13,27 +13,27 @@
     <div class="container-sm custom-container mt-5">
 	    <h1>교수등록</h1>
 	    <form th:action="@{/professors/register}" th:object="${professor}" method="post">
-	        <div class="form-group">
-	            <label for="professorDept">Dept:</label>
+	        <div class="form-group mb-3">
+	            <label for="professorDept">학과</label>
 	            <input type="text" class="form-control" id="professorDept" th:field="*{professorDept}" required/>
 	        </div>
-	        <div class="form-group">
-	            <label for="professorName">Name:</label>
+	        <div class="form-group mb-3">
+	            <label for="professorName">이름</label>
 	            <input type="text" class="form-control" id="professorName" th:field="*{professorName}" required/>
 	        </div>
-	        <div class="form-group">
-	            <label for="professorEmail">Email:</label>
+	        <div class="form-group mb-3">
+	            <label for="professorEmail">Email</label>
 	            <input type="email" class="form-control" id="professorEmail" th:field="*{professorEmail}" required/>
 	        </div>
-	        <div class="form-group">
-	            <label for="professorPw">Pw:</label>
+	        <div class="form-group mb-3">
+	            <label for="professorPw">패스워드</label>
 	            <input type="password" class="form-control" id="professorPw" th:field="*{professorPw}" required/>
 	        </div>
-	        <div class="form-group">
-	            <label for="professorPhone">Phone:</label>
+	        <div class="form-group mb-3">
+	            <label for="professorPhone">전화번호</label>
 	            <input type="text" class="form-control" id="professorPhone" th:field="*{professorPhone}" required/>
 	        </div>
-	        <button type="submit" class="btn btn-primary">Register</button>
+	        <button type="submit" class="btn btn-primary">등록하기</button>
 	    </form>
 	</div>
 

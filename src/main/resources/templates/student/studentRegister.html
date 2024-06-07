@@ -13,27 +13,27 @@
     <div class="container-sm custom-container mt-5">
         <h1>학생등록</h1>
         <form th:action="@{/students/register}" th:object="${student}" method="post">
-            <div class="form-group">
-                <label for="studentNumber">Student Number:</label>
+            <div class="form-group mb-3">
+                <label for="studentNumber">학번</label>
                 <input type="number" class="form-control" id="studentNumber" th:field="*{studentNumber}" required/>
             </div>
-            <div class="form-group">
-                <label for="studentMajor">Major:</label>
+            <div class="form-group mb-3">
+                <label for="studentMajor">전공</label>
                 <input type="text" class="form-control" id="studentMajor" th:field="*{studentMajor}" required/>
             </div>
-            <div class="form-group">
-                <label for="studentGrade">Grade:</label>
+            <div class="form-group mb-3">
+                <label for="studentGrade">학년</label>
                 <input type="number" class="form-control" id="studentGrade" th:field="*{studentGrade}" required/>
             </div>
-            <div class="form-group">
-                <label for="studentClass">Class:</label>
+            <div class="form-group mb-3">
+                <label for="studentClass">반</label>
                 <input type="number" class="form-control" id="studentClass" th:field="*{studentClass}" required/>
             </div>
-            <div class="form-group">
-                <label for="studentPoint">Points:</label>
+            <div class="form-group mb-3">
+                <label for="studentPoint">포인트</label>
                 <input type="number" class="form-control" id="studentPoint" th:field="*{studentPoint}" required/>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">등록하기</button>
         </form>
     </div>
 </body>
