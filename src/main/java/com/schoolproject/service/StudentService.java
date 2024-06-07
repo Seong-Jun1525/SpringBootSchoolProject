@@ -56,10 +56,6 @@ public class StudentService {
     }
 
     
-    public Optional<Student> login(String email, String password) {
-        return studentRepository.findByStudentEmailAndStudentPw(email, password);
-    }
-
     public Student updateStudent(Student student) {
         Optional<Student> existingStudentOpt = studentRepository.findByStudentNumberAndStudentMajor(
                 student.getStudentNumber(), student.getStudentMajor());
@@ -81,5 +77,18 @@ public class StudentService {
     
     public List<Student> findAll() {
         return studentRepository.findAll();
+    }
+    
+    public boolean login(String email, String password) throws StudentNotFoundException {
+        // 이메일을 통해 학생 정보 가져오기
+        Optional<Student> studentOptional = studentRepository.findByStudentEmail(email);
+        
+        // 학생 정보가 없거나 비밀번호가 일치하지 않으면 로그인 실패
+        if (studentOptional.isEmpty() || !studentOptional.get().getStudentPw().equals(password)) {
+            throw new StudentNotFoundException("이메일 또는 비밀번호가 잘못되었습니다. " + studentOptional);
+        }
+
+        // 로그인 성공
+        return true;
     }
 }

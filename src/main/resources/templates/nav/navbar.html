@@ -27,11 +27,12 @@
       
       <ul class="navbar-nav me-3">
         <!-- 로그인된 경우에만 로그아웃 버튼 표시 -->
-        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+        <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
           <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
         </li>
         <!-- 로그인이 되지 않은 경우에만 로그인 버튼 표시 -->
-        <li th:if="${session.loggedInProfessor == null}" class="nav-item">
+        <li th:if="${session.loggedInProfessor == null and session.loggedInStudent == null}" class="nav-item">
+			
           <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               로그인

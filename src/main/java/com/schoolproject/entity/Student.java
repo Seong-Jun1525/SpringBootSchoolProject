@@ -100,20 +100,20 @@ public class Student {
 		this.studentClass = studentClass;
 	}
 
+	public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+	
 	public String getStudentEmail() {
         return studentEmail;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+	public void setStudentPw(String studentPw) {
+        this.studentPw = studentPw;
     }
-
+	
     public String getStudentPw() {
         return studentPw;
-    }
-
-    public void setStudentPw(String studentPw) {
-        this.studentPw = studentPw;
     }
 
     public String getStudentBirthdate() {
