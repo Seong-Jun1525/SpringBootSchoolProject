@@ -21,11 +21,15 @@ public class StudentService {
     }
 
     public Student registerStudent(Student student) {
-    	// Check if student_number already exists
+    	// 만약 학번이 이미 등록되어 있을 경우
         if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
             throw new AlreadyExistsStudentException("이미 존재하는 학번입니다.");
         }
         
+        /** 
+         * 교수가 학생 등록할 때 학생 개인정보는 등록하지 않음
+         * 그래서 해당 컬럼들을 기본값으로 DB에 등록
+         *  */
         if (student.getStudentName() == null) {
             student.setStudentName("");
         }
@@ -71,12 +75,10 @@ public class StudentService {
             existingStudent.setStudentRegistrationDate(LocalDate.now());
             return studentRepository.save(existingStudent);
         } else {
-            throw new StudentNotFoundException("Student not found with number: " + student.getStudentNumber());
+            throw new StudentNotFoundException("학번을 찾을 수 없습니다. " + student.getStudentNumber());
         }
     }
     
-    
-
     public List<Student> findAll() {
         return studentRepository.findAll();
     }

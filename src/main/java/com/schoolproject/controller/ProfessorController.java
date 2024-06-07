@@ -13,6 +13,8 @@ import com.schoolproject.entity.Professor;
 import com.schoolproject.exception.ProfessorLoginException;
 import com.schoolproject.service.ProfessorService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/professors")
 public class ProfessorController {
@@ -28,12 +30,14 @@ public class ProfessorController {
 	    return "";
 	}
 	
+	// 교수 등록 페이지
 	@GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("professor", new Professor());
         return "professor/professorRegister";
     }
 
+	// 교수 등록
     @PostMapping("/register")
     public String registerProfessor(@ModelAttribute Professor professor) {
         try {
@@ -53,28 +57,42 @@ public class ProfessorController {
         return "professor/professorLogin";
     }
     
+    // 교수 로그인
     @PostMapping("/login")
     public String login(@ModelAttribute("professor") Professor professor,
                         BindingResult bindingResult,
-                        Model model) {
+                        Model model,
+                        HttpSession session) {
         if (bindingResult.hasErrors()) {
-            return "professor/professorLogin"; // 유효성 검사 오류가 발생한 경우 로그인 페이지 다시 표시
+        	throw new ProfessorLoginException("유효성 검사 오류 발생");
         }
-
+        
+        // 입력받은 교수 이메일과 교수 패스워드값 확인
+        System.out.println(professor.getProfessorEmail() + " " + professor.getProfessorPw());
         try {
-            boolean loginSuccess = professorService.login(professor.getProfessorEmail(), professor.getProfessorPw());
-            if (loginSuccess) {
+        	boolean loginSuccess = professorService.login(professor.getProfessorEmail(), professor.getProfessorPw());
+        	if (loginSuccess) {
                 // 로그인 성공 시 다음 페이지로 리다이렉트 또는 모델에 추가 정보 전달 가능
-                return "redirect:/"; // 예시: 교수 대시보드 페이지로 리다이렉트
+        		System.out.println(professor + " " + professor.getProfessorEmail());
+                session.setAttribute("loggedInProfessor", professor);
+                return "redirect:/";
             } else {
-                // 로그인 실패 시 에러 메시지 표시
+                // 이 부분은 도달하지 않음, 예외가 발생할 것이기 때문
                 throw new ProfessorLoginException("이메일 또는 패스워드가 잘못되었습니다.");
             }
-        } catch (Exception e) {
-            throw new ProfessorLoginException("등록된 Email이 없습니다.");
+        } catch (ProfessorLoginException e) {
+            throw new ProfessorLoginException("이메일 또는 패스워드가 잘못되었습니다.2");
         }
     }
     
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+        return "redirect:/"; // 홈 페이지 또는 로그아웃 후 이동할 페이지로 리다이렉트
+    }
+
+    // 교수 목록 불러오기
     @GetMapping("/list")
     public String listProfessors(Model model) {
         model.addAttribute("professors", professorService.findAll());

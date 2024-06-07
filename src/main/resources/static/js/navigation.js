@@ -1,33 +1,37 @@
-// 네비게이션 링크 클릭 이벤트 처리
 document.addEventListener("DOMContentLoaded", function() {
-    var navLinks = document.querySelectorAll(".nav-link");
-    navLinks.forEach(function(link) {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            var url = this.getAttribute("href");
-            loadContent(url);
-        });
+    // 드롭다운 메뉴 토글
+    var dropdownToggle = document.getElementById("dropdownMenuButton");
+    dropdownToggle.addEventListener("click", function(event) {
+        event.preventDefault();
+        var dropdownMenu = document.querySelector(".dropdown-menu");
+        dropdownMenu.classList.toggle("show");
+    });
+
+    // 클릭 이벤트가 드롭다운 메뉴 외부를 클릭할 때 드롭다운을 닫습니다.
+    document.addEventListener("click", function(event) {
+        var isClickInside = dropdownToggle.contains(event.target);
+        var dropdownMenu = document.querySelector(".dropdown-menu");
+        if (!isClickInside && dropdownMenu.classList.contains("show")) {
+            dropdownMenu.classList.remove("show");
+        }
     });
 });
 
-// AJAX 요청 및 페이지 업데이트
-function loadContent(url) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                updateContent(xhr.responseText);
-            } else {
-                console.error("Error loading content. Status code: " + xhr.status);
-            }
+function loadContent(event) {
+    event.preventDefault();
+    const url = event.target.getAttribute('data-url');
+    
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/html'
         }
-    };
-    xhr.send();
-}
-
-// 페이지 업데이트
-function updateContent(html) {
-    var mainContent = document.getElementById("main-content");
-    mainContent.innerHTML = html;
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('main-content').innerHTML = data;
+    })
+    .catch(error => {
+        console.error('Error fetching content:', error);
+    });
 }

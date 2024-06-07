@@ -1,36 +1,46 @@
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-		<img src="imgs/logo.png" class="logo" />
-	</a>
+      <img src="imgs/logo.png" class="logo" />
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/students/register}" onclick="loadContent(event)">학생등록</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/students/register}">학생등록</a>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/professors/register}" onclick="loadContent(event)">교수등록</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/professors/register}">교수등록</a>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/students/list}">학생목록</a>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/professors/list}" onclick="loadContent(event)">교수목록</a>
         </li>
-        <li class="nav-item">
-	    	<a class="nav-link" th:href="@{/professors/list}">교수목록</a>
+        <li th:if="${session.loggedInProfessor == null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
         </li>
-        <li class="nav-item">
-	    	<a class="nav-link" th:href="@{/professors/login}">교수로그인</a>
+      </ul>
+      
+      <ul class="navbar-nav me-3">
+        <!-- 로그인된 경우에만 로그아웃 버튼 표시 -->
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
         </li>
-        <li class="nav-item">
-	    	<a class="nav-link" th:href="@{/students/login}">로그인</a>
-        </li>
-        <li class="nav-item">
-	    	<a class="nav-link" th:href="@{/students/update}">회원가입</a>
+        <!-- 로그인이 되지 않은 경우에만 로그인 버튼 표시 -->
+        <li th:if="${session.loggedInProfessor == null}" class="nav-item">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              로그인
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" th:href="@{/professors/login}">교수 로그인</a></li>
+              <li><a class="dropdown-item" th:href="@{/students/login}">학생 로그인</a></li>
+            </ul>
+          </div>
         </li>
       </ul>
       <form class="d-flex" role="search">
