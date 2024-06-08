@@ -17,7 +17,7 @@ public class Student {
     @Column(name = "student_name", nullable = false, columnDefinition = "varchar(30) default ''")
     private String studentName;
     
-    @Column(name = "student_number", nullable = false, columnDefinition = "int default 0")
+    @Column(name = "student_number", nullable = false, unique = true, columnDefinition = "int default 0")
     private Integer studentNumber;
     
     @Column(name = "student_major", nullable = false, columnDefinition = "varchar(100) default ''")
@@ -156,12 +156,4 @@ public class Student {
         this.studentRegistrationDate = studentRegistrationDate;
     }
 
-    @Override
-    public String toString() {
-        return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentNumber=" + studentNumber
-                + ", studentMajor=" + studentMajor + ", studentGrade=" + studentGrade + ", studentClass=" + studentClass
-                + ", studentEmail=" + studentEmail + ", studentPw=" + studentPw + ", studentBirthdate="
-                + studentBirthdate + ", studentPhone=" + studentPhone + ", studentGender=" + studentGender
-                + ", studentPoint=" + studentPoint + ", studentRegistrationDate=" + studentRegistrationDate + "]";
-    }
 }

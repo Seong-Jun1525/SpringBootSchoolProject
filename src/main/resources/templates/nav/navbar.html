@@ -26,7 +26,7 @@
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/lectures/list}" onclick="loadContent(event)">강의목록</a>
         </li>
-        <li th:if="${session.loggedInStudent == null}" class="nav-item">
+        <li th:if="${session.loggedInStudent == null and session.loggedInProfessor == null }" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
         </li>
         <li th:if="${session.loggedInStudent != null}" class="nav-item">
@@ -34,6 +34,12 @@
         </li>
         <li th:if="${session.loggedInStudent != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
+        </li>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/grades/input}" onclick="loadContent(event)">성적등록</a>
+        </li>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
         </li>
       </ul>
       

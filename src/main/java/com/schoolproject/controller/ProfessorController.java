@@ -100,4 +100,6 @@ public class ProfessorController {
         model.addAttribute("professors", professorService.findAll());
         return "professor/professorList";
     }
+    
+    
 }
