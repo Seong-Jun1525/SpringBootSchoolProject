@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>강의등록</title>
+    <style>
+        .custom-container {
+            max-width: 500px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-sm custom-container mt-5">
+        <h1>강의등록</h1>
+        <form th:action="@{/courses/register}" th:object="${course}" method="post">
+            <div class="form-group mb-3">
+                <label for="courseName">강의명</label>
+                <input type="text" class="form-control" id="courseName" th:field="*{courseName}" required/>
+            </div>
+            <div class="form-group mb-3">
+			    <label for="professorEmail">담당 교수 이메일</label>
+			    <!-- 담당 교수 이메일을 현재 로그인된 교수의 이메일로 설정. 이때 field 값은 지정하지 않아야 함. 지정하면 value가 적용이 안됨. 대신 name을 지정해야함 -->
+			    <input type="email" class="form-control" id="professorEmail" name="professorEmail" th:value="${loggedInProfessorEmail}" required readonly/>
+			</div>
+            <div class="form-group mb-3">
+			    <label for="courseSemester">수강 학기</label>
+			    <select class="form-control" id="courseSemester" th:field="*{courseSemester}" required>
+			        <option value="">선택하세요</option>
+			        <option value="1학기">1학기</option>
+			        <option value="2학기">2학기</option>
+			    </select>
+			</div>
+            <div class="form-group mb-3">
+                <label for="courseCapacity">수강 정원</label>
+                <input type="number" class="form-control" id="courseCapacity" th:field="*{courseCapacity}" required/>
+            </div>
+            <div class="form-group mb-3">
+                <label for="courseType">강의 유형</label>
+                <select class="form-control" id="courseType" th:field="*{courseType}" required>
+                    <option value="">선택하세요</option>
+                    <option value="전공">전공</option>
+                    <option value="교양">교양</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="courseLectureDay">강의 요일</label>
+                <input type="text" class="form-control" id="courseLectureDay" th:field="*{courseLectureDay}" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">등록하기</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -15,10 +15,16 @@
           <a class="nav-link" href="#" th:data-url="@{/professors/register}" onclick="loadContent(event)">교수등록</a>
         </li>
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/courses/register}" onclick="loadContent(event)">강좌등록</a>
+        </li>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
         </li>
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/professors/list}" onclick="loadContent(event)">교수목록</a>
+        </li>
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/courses/list}" onclick="loadContent(event)">강의목록</a>
         </li>
         <li th:if="${session.loggedInProfessor == null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
@@ -26,11 +32,14 @@
       </ul>
       
       <ul class="navbar-nav me-3">
-        <!-- 로그인된 경우에만 로그아웃 버튼 표시 -->
+        <!-- 로그인된 경우 표시 -->
+        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+          <a class="nav-link" th:text="${#strings.substringBefore(session.loggedInProfessor.getProfessorEmail(), '@')} + '님'">email</a>
+        </li>
         <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
           <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
         </li>
-        <!-- 로그인이 되지 않은 경우에만 로그인 버튼 표시 -->
+        <!-- 로그인이 되지 않은 경우 표시 -->
         <li th:if="${session.loggedInProfessor == null and session.loggedInStudent == null}" class="nav-item">
 			
           <div class="dropdown">

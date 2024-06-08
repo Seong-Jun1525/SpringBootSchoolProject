@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>강의목록</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-sm mt-4">
+        <h1>강의목록</h1>
+        <table class="table table-striped table-hover">
+            <thead class="table-success">
+                <tr>
+                    <th>Num</th>
+                    <th>강의명</th>
+                    <th>담당 교수 이메일</th>
+                    <th>수강 학기</th>
+                    <th>수강 정원</th>
+                    <th>강의 유형</th>
+                    <th>강의 요일</th>
+                    <th>강의 등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.courseId}">1</td>
+                    <td th:text="${course.courseName}">Introduction to Computer Science</td>
+                    <td th:text="${course.professorEmail}">john.doe@example.com</td>
+                    <td th:text="${course.courseSemester}">1학기</td>
+                    <td th:text="${course.courseCapacity}">30</td>
+                    <td th:text="${course.courseType}">전공</td>
+                    <td th:text="${course.courseLectureDay}">월, 수</td>
+                    <td th:text="${course.courseRegistrationDate}">2024-01-01</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

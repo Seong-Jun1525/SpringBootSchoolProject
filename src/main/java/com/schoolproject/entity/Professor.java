@@ -14,23 +14,23 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long professorId;
     
-    @Column(name = "professor_name", nullable = false, length = 30)
+    @Column(name = "professor_name", length = 30)
     private String professorName;
     
-    @Column(name = "professor_dept", nullable = false, length = 50)
+    @Column(name = "professor_dept", length = 50)
     private String professorDept;
     
-    @Column(name = "professor_email", nullable = false, length = 100)
+    @Column(name = "professor_email", nullable = false, unique = true, length = 100)
     private String professorEmail;
     
     @Column(name = "professor_phone", length = 20)
-    private String professorPhone = "";
+    private String professorPhone;
     
-    @Column(name = "professor_registration_date", nullable = false)
-    private LocalDate professorRegistrationDate = LocalDate.of(1970, 1, 1);
+    @Column(name = "professor_registration_date")
+    private LocalDate professorRegistrationDate;
     
-    @Column(name = "professor_pw", nullable = false, length = 20)
-    private String professorPw = "";
+    @Column(name = "professor_pw", length = 20)
+    private String professorPw;
     
     // Getters and Setters
     public Long getProfessorId() {

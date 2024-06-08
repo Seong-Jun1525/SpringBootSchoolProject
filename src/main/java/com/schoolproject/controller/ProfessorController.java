@@ -75,6 +75,8 @@ public class ProfessorController {
                 // 로그인 성공 시 다음 페이지로 리다이렉트 또는 모델에 추가 정보 전달 가능
         		System.out.println(professor + " " + professor.getProfessorEmail());
                 session.setAttribute("loggedInProfessor", professor);
+                // 로그인 성공 시 세션에 이메일 저장
+                session.setAttribute("loggedInProfessorEmail", professor.getProfessorEmail());
                 return "redirect:/";
             } else {
                 // 이 부분은 도달하지 않음, 예외가 발생할 것이기 때문
