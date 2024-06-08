@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="container mt-4">
+        <h1>강의평가 작성</h1>
+        <form th:action="@{/evaluations/register}" th:object="${evaluation}" method="post">
+            <div class="mb-3">
+                <label for="studentEmail" class="form-label">학생 이메일</label>
+                <input type="email" id="studentEmail" name="studentEmail" class="form-control" th:value="${session.loggedInStudentEmail}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="lectureName" class="form-label">강의 이름</label>
+                <input type="text" id="lectureName" name="lectureName" class="form-control" th:field="*{lectureName}">
+            </div>
+            <div class="mb-3">
+                <label for="professorName" class="form-label">교수 이름</label>
+                <input type="text" id="professorName" name="professorName" class="form-control" th:field="*{professorName}">
+            </div>
+            <div class="mb-3">
+                <label for="lectureSemester" class="form-label">학기</label>
+                <select id="lectureSemester" name="lectureSemester" class="form-control" th:field="*{lectureSemester}">
+                    <option value="1">1학기</option>
+                    <option value="2">2학기</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="lectureType" class="form-label">강의 유형</label>
+                <select id="lectureType" name="lectureType" class="form-control" th:field="*{lectureType}">
+                    <option value="전공">전공</option>
+                    <option value="교양">교양</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="evaluationTitle" class="form-label">평가 제목</label>
+                <input type="text" id="evaluationTitle" name="evaluationTitle" class="form-control" th:field="*{evaluationTitle}">
+            </div>
+            <div class="mb-3">
+                <label for="evaluationContent" class="form-label">평가 내용</label>
+                <textarea id="evaluationContent" name="evaluationContent" class="form-control" th:field="*{evaluationContent}"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="lectureTotalScore" class="form-label">총 점수</label><br>
+                <div th:field="*{lectureTotalScore}">
+                    <input type="radio" id="totalScoreA" name="lectureTotalScore" value="A"> <label for="totalScoreA">A</label>
+                    <input type="radio" id="totalScoreB" name="lectureTotalScore" value="B"> <label for="totalScoreB">B</label>
+                    <input type="radio" id="totalScoreC" name="lectureTotalScore" value="C"> <label for="totalScoreC">C</label>
+                    <input type="radio" id="totalScoreD" name="lectureTotalScore" value="D"> <label for="totalScoreD">D</label>
+                    <input type="radio" id="totalScoreF" name="lectureTotalScore" value="F"> <label for="totalScoreF">F</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lectureCreditScore" class="form-label">학점 점수</label><br>
+                <div th:field="*{lectureCreditScore}">
+                    <input type="radio" id="creditScore3" name="lectureCreditScore" value="3"> <label for="creditScore3">3학점</label>
+                    <input type="radio" id="creditScore2" name="lectureCreditScore" value="2"> <label for="creditScore2">2학점</label>
+                    <input type="radio" id="creditScore1" name="lectureCreditScore" value="1"> <label for="creditScore1">1학점</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lectureComfortableScore" class="form-label">편의성 점수</label><br>
+                <div th:field="*{lectureComfortableScore}">
+                    <input type="radio" id="comfortableScoreA" name="lectureComfortableScore" value="A"> <label for="comfortableScoreA">A</label>
+                    <input type="radio" id="comfortableScoreB" name="lectureComfortableScore" value="B"> <label for="comfortableScoreB">B</label>
+                    <input type="radio" id="comfortableScoreC" name="lectureComfortableScore" value="C"> <label for="comfortableScoreC">C</label>
+                    <input type="radio" id="comfortableScoreD" name="lectureComfortableScore" value="D"> <label for="comfortableScoreD">D</label>
+                    <input type="radio" id="comfortableScoreF" name="lectureComfortableScore" value="F"> <label for="comfortableScoreF">F</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lectureScore" class="form-label">강의 점수</label><br>
+                <div th:field="*{lectureScore}">
+                    <input type="radio" id="lectureScoreA" name="lectureScore" value="A"> <label for="lectureScoreA">A</label>
+                    <input type="radio" id="lectureScoreB" name="lectureScore" value="B"> <label for="lectureScoreB">B</label>
+                    <input type="radio" id="lectureScoreC" name="lectureScore" value="C"> <label for="lectureScoreC">C</label>
+                    <input type="radio" id="lectureScoreD" name="lectureScore" value="D"> <label for="lectureScoreD">D</label>
+                    <input type="radio" id="lectureScoreF" name="lectureScore" value="F"> <label for="lectureScoreF">F</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">제출</button>
+        </form>
+    </div>
+</html>

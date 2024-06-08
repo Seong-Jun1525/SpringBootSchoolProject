@@ -15,7 +15,7 @@
           <a class="nav-link" href="#" th:data-url="@{/professors/register}" onclick="loadContent(event)">교수등록</a>
         </li>
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
-          <a class="nav-link" href="#" th:data-url="@{/courses/register}" onclick="loadContent(event)">강좌등록</a>
+          <a class="nav-link" href="#" th:data-url="@{/lectures/register}" onclick="loadContent(event)">강의등록</a>
         </li>
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
@@ -24,10 +24,16 @@
           <a class="nav-link" href="#" th:data-url="@{/professors/list}" onclick="loadContent(event)">교수목록</a>
         </li>
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
-          <a class="nav-link" href="#" th:data-url="@{/courses/list}" onclick="loadContent(event)">강의목록</a>
+          <a class="nav-link" href="#" th:data-url="@{/lectures/list}" onclick="loadContent(event)">강의목록</a>
         </li>
-        <li th:if="${session.loggedInProfessor == null}" class="nav-item">
+        <li th:if="${session.loggedInStudent == null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
+        </li>
+        <li th:if="${session.loggedInStudent != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/evaluations/register}" onclick="loadContent(event)">강의평가</a>
+        </li>
+        <li th:if="${session.loggedInStudent != null}" class="nav-item">
+          <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
         </li>
       </ul>
       
