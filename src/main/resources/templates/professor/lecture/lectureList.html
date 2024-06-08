@@ -15,15 +15,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="course : ${courses}">
-                    <td th:text="${course.courseId}">1</td>
-                    <td th:text="${course.courseName}">Introduction to Computer Science</td>
-                    <td th:text="${course.professorEmail}">john.doe@example.com</td>
-                    <td th:text="${course.courseSemester}">1학기</td>
-                    <td th:text="${course.courseCapacity}">30</td>
-                    <td th:text="${course.courseType}">전공</td>
-                    <td th:text="${course.courseLectureDay}">월, 수</td>
-                    <td th:text="${course.courseRegistrationDate}">2024-01-01</td>
+                <tr th:each="lecture : ${lectures}">
+					<td th:text="${lecture.lectureId}">1</td>
+                    <td th:text="${lecture.lectureName}">Introduction to Computer Science</td>
+                    <td th:text="${lecture.professorEmail}">john.doe@example.com</td>
+                    <td th:text="${lecture.lectureSemester}">1학기</td>
+                    <td th:text="${lecture.lectureCapacity}">30</td>
+                    <td th:text="${lecture.lectureType}">전공</td>
+                    <td th:text="${lecture.lectureLectureDay}">월, 수</td>
+                    <td th:text="${lecture.lectureRegistrationDate}">2024-01-01</td>
                 </tr>
             </tbody>
         </table>
