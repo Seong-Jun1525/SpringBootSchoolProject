@@ -38,7 +38,7 @@
         <li th:if="${session.loggedInProfessor != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/grades/input}" onclick="loadContent(event)">성적등록</a>
         </li>
-        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+        <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
         </li>
       </ul>
