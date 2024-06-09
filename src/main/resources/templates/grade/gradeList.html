@@ -7,6 +7,7 @@
                 <tr>
                     <th>No.</th>
                     <th>학번</th>
+                    <th>학생 이메일</th>
                     <th>강의 명</th>
                     <th>교수 이메일</th>
                     <th>성  적</th>
@@ -14,11 +15,12 @@
             </thead>
             <tbody>
                 <tr th:each="grade : ${grades}">
-					<td th:text="${grade.gradeId}">1</td>
-                    <td th:text="${grade.studentNumber}">2024000000</td>
-                    <td th:text="${grade.lectureName}">Java Spring</td>
-                    <td th:text="${grade.professorEmail}">john.doe@example.com</td>
-                    <td th:text="${grade.score}">100</td>
+					<td th:text="${grade.gradeId}"></td>
+					<td th:text="${grade.studentNumber}"></td>
+					<td th:text="${grade.studentEmail}"></td>  
+                    <td th:text="${grade.lectureName}"></td>
+                    <td th:text="${grade.professorEmail}"></td>
+                    <td th:text="${grade.score}"></td>
                 </tr>
             </tbody>
         </table>

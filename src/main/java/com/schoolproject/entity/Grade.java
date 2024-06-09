@@ -20,6 +20,9 @@ public class Grade {
 
     @Column(name = "student_number", unique = true, nullable = false)
     private int studentNumber;
+    
+    @Column(name = "student_email", unique = true, length = 100)
+    private String studentEmail;
 
     @Column(name = "lecture_name", unique = true, length = 100)
     private String lectureName;
@@ -50,6 +53,16 @@ public class Grade {
 
 	public void setStudentNumber(int studentNumber) {
 		this.studentNumber = studentNumber;
+	}
+	
+	
+
+	public String getStudentEmail() {
+		return studentEmail;
+	}
+
+	public void setStudentEmail(String studentEmail) {
+		this.studentEmail = studentEmail;
 	}
 
 	public String getLectureName() {

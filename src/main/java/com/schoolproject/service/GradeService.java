@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.schoolproject.entity.Grade;
 import com.schoolproject.entity.Lecture;
+import com.schoolproject.entity.Student;
 import com.schoolproject.repository.GradeRepository;
-
+import com.schoolproject.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -23,10 +24,13 @@ public class GradeService {
     public void inputGrade(Grade grade) {
         gradeRepository.save(grade);
     }
+
+	public List<Grade> findByStudentEmail(String loggedInStudentEmail) {
+		return gradeRepository.findByStudentEmail(loggedInStudentEmail);
+	}
     
- // 강의 목록
- 	public List<Grade> findAll() {
-         return gradeRepository.findAll();
-     }
+	public List<Grade> findByProfessorEmail(String loggedInProfessorEmail) {
+		return gradeRepository.findByProfessorEmail(loggedInProfessorEmail);
+	}
 }
     

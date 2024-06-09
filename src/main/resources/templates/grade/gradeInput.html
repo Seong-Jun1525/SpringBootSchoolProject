@@ -9,20 +9,35 @@
         <h1>성적 입력</h1>
         <form action="/grades/input" method="post" class="needs-validation" novalidate>
 			
-            <div class="form-group">
+			 <div class="form-group">
                 <label for="studentNumber">학번</label>
-                <input type="text" id="studentNumber" name="studentNumber" class="form-control" required>
+                <div class="input-group">
+                    <input type="text" id="studentNumber" name="studentNumber" class="form-control" required>
+                </div>
+                
                 <div class="invalid-feedback">학생 번호를 입력하세요.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="lectureName">강의명</label>
-               <input type="text" id="lectureName" name="lectureName" class="form-control" required>
             </div>
             
             <div class="form-group">
-                <label for="lectureName">교수 이메일</label>
-               <input type="text" id="professorEmail" name="professorEmail" class="form-control" required>
+                <label for="studentEmail">학생 이메일</label>
+                <div class="input-group">
+                    <input type="text" id="studentEmail" name="studentEmail" class="form-control" required>
+                </div>
+                
+                <div class="invalid-feedback">이메일을 입력하세요.</div>
+            </div>
+			
+            <div class="form-group">
+                <label for="lectureName">강의명</label>
+                <div class="input-group">
+                    <input type="text" id="lectureName" name="lectureName" class="form-control" required>
+                </div>
+                <div class="invalid-feedback">강의명을 입력하세요.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="professorEmail">교수 이메일</label>
+                <input type="email" class="form-control" id="professorEmail" name="professorEmail" th:value="${loggedInProfessorEmail}" required readonly/>
             </div>
             
             <div class="form-group">
@@ -31,11 +46,10 @@
                 <div class="invalid-feedback">성적을 입력하세요.</div>
             </div>
             
-			
-            
             <button type="submit" class="btn btn-primary">성적 입력</button>
         </form>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         (function() {
@@ -54,5 +68,6 @@
             }, false);
         })();
     </script>
+    
 </body>
 </html>
