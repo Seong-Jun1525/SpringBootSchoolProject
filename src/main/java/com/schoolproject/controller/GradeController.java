@@ -36,7 +36,7 @@ public class GradeController {
         String loggedInProfessorEmail = (String) session.getAttribute("loggedInProfessorEmail");
         System.out.println(loggedInProfessorEmail); // 정상적으로 저장되어있는지 콘솔에서 확인
         model.addAttribute("loggedInProfessorEmail", loggedInProfessorEmail);
-        return "grade/gradeInput"; 
+        return "professor/grade/gradeInput";
     }
 
     // 성적 입력 처리
@@ -51,7 +51,7 @@ public class GradeController {
         }
     }
     
- // 성적 목록 불러오기
+    // 성적 목록 불러오기
     @GetMapping("/list")
     public String listGrade(Model model, HttpSession session) {
         String loggedInStudentEmail = (String) session.getAttribute("loggedInStudentEmail");
@@ -62,7 +62,7 @@ public class GradeController {
         	System.out.println("LoggedInStudentEmail: " + loggedInStudentEmail);
         	grades = gradeService.findByProfessorEmail(loggedInProfessorEmail);
         	model.addAttribute("grades", grades);
-        	return "grade/gradelist";
+        	return "professor/grade/gradelist";
         }
         
         if (loggedInStudentEmail != null) {
@@ -70,10 +70,8 @@ public class GradeController {
             model.addAttribute("loggedInStudentEmail", loggedInStudentEmail);
             grades = gradeService.findByStudentEmail(loggedInStudentEmail);;
             model.addAttribute("grades", grades);
-            return "grade/gradelist";
+            return "professor/grade/gradelist";
         }
-        
         return "redirect:/login";
     }
-    
 }
