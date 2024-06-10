@@ -99,7 +99,5 @@ public class ProfessorController {
     public String listProfessors(Model model) {
         model.addAttribute("professors", professorService.findAll());
         return "professor/professorList";
-    }
-    
-    
+    }  
 }

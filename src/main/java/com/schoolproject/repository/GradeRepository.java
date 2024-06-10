@@ -15,4 +15,6 @@ public interface GradeRepository extends JpaRepository<Grade, Long> {
     List<Grade> findByStudentEmail(String studentEmail);
     List<Grade> findByProfessorEmail(String ProfessorEmail);
     
+    
+    
 }

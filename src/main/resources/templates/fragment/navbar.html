@@ -56,7 +56,7 @@
 		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
 				목록
 			</a>
-		    <ul class="dropdown-menu">
+		    <ul class="dropdown-menu" >
 				<li>
 					<a class="dropdown-item" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
 				</li>
@@ -83,6 +83,9 @@
         <li th:if="${session.loggedInStudent != null}" class="nav-item">
           <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
         </li>
+        <li th:if="${session.loggedInStudent != null}" class="nav-item">
+			<a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
+		</li>
       </ul>
     </div>
   </div>
