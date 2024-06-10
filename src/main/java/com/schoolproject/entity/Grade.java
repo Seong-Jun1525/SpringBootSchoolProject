@@ -18,16 +18,16 @@ public class Grade {
     @Column(name = "grade_id")
     private Long gradeId;
 
-    @Column(name = "student_number", unique = true, nullable = false)
+    @Column(name = "student_number", nullable = false)
     private int studentNumber;
     
-    @Column(name = "student_email", unique = true, length = 100)
+    @Column(name = "student_email", length = 100)
     private String studentEmail;
 
     @Column(name = "lecture_name", unique = true, length = 100)
     private String lectureName;
 
-    @Column(name = "professor_email", unique = true, length = 100)
+    @Column(name = "professor_email", length = 100)
     private String professorEmail;
 
     @Column(name = "score")
