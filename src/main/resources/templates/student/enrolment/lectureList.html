@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="container p-5 d-flex flex-column">
+		<div class="mb-3">
+			<h3>개설강좌 조회 페이지</h3>
+			<form id="searchForm" th:action="@{/enrolments/search}" th:object="${lecture}" method="post">
+				<div class="d-flex justify-content-between">
+					<div>
+						<label for="lectureRegistrationDate" class="form-label">년도</label>
+						<input type="text" class="form-control" id="lectureRegistrationDate" th:field="*{lectureRegistrationDate}" placeholder="2024" />
+					</div>
+					<div>
+						<label for="lectureSemester" class="form-label">학기</label>
+						<input type="text" class="form-control" id="lectureSemester" th:field="*{lectureSemester}" placeholder="1학기" />
+					</div>
+					<div>
+						<label for="lectureMajor" class="form-label">전공</label>
+						<input type="text" class="form-control" id="lectureMajor" th:field="*{lectureMajor}" placeholder="전공" />
+					</div>
+					<div>
+						<label for="lectureGrade" class="form-label">학년</label>
+						<input type="number" class="form-control" id="lectureGrade" th:field="*{lectureGrade}" placeholder="학년" />
+					</div>
+				</div>
+				<button class="float-end mt-3 btn btn-primary" href="#" th:data-url="@{/enrolments/search}" onclick="loadSearchContent(event)">검색</button>
+			</form>
+		</div>
+		<main id="search-content" class="w-100" layout:fragment="content">
+	        <!-- 삽입될 내용 -->
+			<div th:include="student/enrolment/lectureResults :: lectureResultsFragment"></div>
+	    </main>
+	</div>
+</html>

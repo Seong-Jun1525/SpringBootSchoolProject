@@ -1,0 +1,39 @@
+<html th:fragment="majorResultsFragment" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${#lists.isEmpty(lectures)}">
+        <p>등록된 데이터가 없습니다</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(lectures)}">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-success">
+                    <th>NUM</th>
+                    <th>강의명</th>
+                    <th>교수명</th>
+                    <th>학점</th>
+                    <th>분류</th>
+                    <th>학년</th>
+                    <th>개설학과</th>
+                    <th>강의요일</th>
+                    <th>신청하기</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lecture : ${lectures}">
+                    <td th:text="${lecture.lectureId}"></td>
+                    <td th:text="${lecture.lectureName}"></td>
+                    <td th:text="${lecture.professorName}"></td>
+                    <td th:text="${lecture.lectureCredit}"></td>
+                    <td th:text="${lecture.lectureType}"></td>
+                    <td th:text="${lecture.lectureGrade}"></td>
+                    <td th:text="${lecture.lectureMajor}"></td>
+                    <td th:text="${lecture.lectureLectureDay}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/enrolments/major/register(lectureId=${lecture.lectureId})}">
+						    강의평가
+						</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</html>

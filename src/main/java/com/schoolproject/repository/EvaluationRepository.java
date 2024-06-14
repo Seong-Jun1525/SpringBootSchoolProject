@@ -8,4 +8,6 @@ import com.schoolproject.entity.Evaluation;
 
 public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
 	List<Evaluation> findByStudentEmail(String studentEmail);
+
+	boolean existsByEvaluationId(Long evluationId);
 }

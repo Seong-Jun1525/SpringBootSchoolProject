@@ -1,6 +1,6 @@
 nav {
 	width: 300px;
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .logo {
@@ -15,6 +15,12 @@ nav {
 
 .nav-link {
 	color: white !important;
+}
+th, td {
+	text-align: center !important;
+}
+td {
+	
 }
 
 main {

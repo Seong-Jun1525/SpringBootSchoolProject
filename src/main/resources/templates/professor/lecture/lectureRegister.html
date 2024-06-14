@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>강의등록</title>
-    <style>
-        .custom-container {
-            max-width: 500px;
-            margin-bottom: 50px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-sm custom-container mt-5">
+    <div class="container p-5">
         <h1>강의등록</h1>
         <form th:action="@{/lectures/register}" th:object="${lecture}" method="post">
             <div class="form-group mb-3">
                 <label for="lectureName">강의명</label>
                 <input type="text" class="form-control" id="lectureName" th:field="*{lectureName}" required/>
             </div>
+            <div class="form-group mb-3">
+                <label for="lectureMajor">학과</label>
+                <input type="text" class="form-control" id="lectureMajor" th:field="*{lectureMajor}" required/>
+            </div>
+            <div class="form-group mb-3">
+			    <label for="professorName">담당 교수명</label>
+			    <!-- 담당 교수 이메일을 현재 로그인된 교수의 이메일로 설정. 이때 field 값은 지정하지 않아야 함. 지정하면 value가 적용이 안됨. 대신 name을 지정해야함 -->
+			    <input type="text" class="form-control" id="professorName" name="professorName" th:value="${loggedInProfessorName}" required readonly/>
+			</div>
             <div class="form-group mb-3">
 			    <label for="professorEmail">담당 교수 이메일</label>
 			    <!-- 담당 교수 이메일을 현재 로그인된 교수의 이메일로 설정. 이때 field 값은 지정하지 않아야 함. 지정하면 value가 적용이 안됨. 대신 name을 지정해야함 -->
@@ -30,6 +29,14 @@
 			        <option value="2학기">2학기</option>
 			    </select>
 			</div>
+            <div class="form-group mb-3">
+                <label for="lectureCredit">학점</label>
+                <input type="number" class="form-control" id="lectureCredit" th:field="*{lectureCredit}" required/>
+            </div>
+            <div class="form-group mb-3">
+                <label for="lectureGrade">수강 학년</label>
+                <input type="number" class="form-control" id="lectureGrade" th:field="*{lectureGrade}" required/>
+            </div>
             <div class="form-group mb-3">
                 <label for="lectureCapacity">수강 정원</label>
                 <input type="number" class="form-control" id="lectureCapacity" th:field="*{lectureCapacity}" required/>
@@ -49,5 +56,4 @@
             <button type="submit" class="btn btn-primary">등록하기</button>
         </form>
     </div>
-</body>
 </html>

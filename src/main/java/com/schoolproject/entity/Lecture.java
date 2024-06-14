@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "lecture")
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,6 +12,12 @@ public class Lecture {
     
     @Column(name = "lecture_name", length = 100, nullable = false)
     private String lectureName;
+
+    @Column(name = "lecture_major", length = 100, nullable = false, columnDefinition = "VARCHAR DEFAULT '컴퓨터소프트웨어공학과'")
+    private String lectureMajor;
+    
+    @Column(name = "professor_name", length = 30)
+    private String professorName;
     
     @Column(name = "professor_email", length = 100)
     private String professorEmail;
@@ -21,6 +28,9 @@ public class Lecture {
     @Column(name = "lecture_capacity")
     private int lectureCapacity;
     
+    @Column(name = "lecture_grade", columnDefinition = "int DEFAULT 1")
+    private int lectureGrade;
+    
     @Column(name = "lecture_type", length = 50)
     private String lectureType;
     
@@ -29,6 +39,9 @@ public class Lecture {
     
     @Column(name = "lecture_registration_date", columnDefinition = "DATE DEFAULT '1970-01-01'")
     private LocalDate lectureRegistrationDate;
+    
+    @Column(name="lecture_credit", nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int lectureCredit;
 
     // Getters and Setters
 
@@ -48,7 +61,23 @@ public class Lecture {
         this.lectureName = lectureName;
     }
 
-    public String getProfessorEmail() {
+    public String getLectureMajor() {
+		return lectureMajor;
+	}
+
+	public void setLectureMajor(String lectureMajor) {
+		this.lectureMajor = lectureMajor;
+	}
+
+	public String getProfessorName() {
+		return professorName;
+	}
+
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
+	}
+
+	public String getProfessorEmail() {
         return professorEmail;
     }
 
@@ -64,7 +93,15 @@ public class Lecture {
         this.lectureSemester = lectureSemester;
     }
 
-    public int getLectureCapacity() {
+    public int getLectureGrade() {
+		return lectureGrade;
+	}
+
+	public void setLectureGrade(int lectureGrade) {
+		this.lectureGrade = lectureGrade;
+	}
+
+	public int getLectureCapacity() {
         return lectureCapacity;
     }
 
@@ -95,4 +132,12 @@ public class Lecture {
     public void setLectureRegistrationDate(LocalDate lectureRegistrationDate) {
         this.lectureRegistrationDate = lectureRegistrationDate;
     }
+
+	public int getLectureCredit() {
+		return lectureCredit;
+	}
+
+	public void setLectureCredit(int lectureCredit) {
+		this.lectureCredit = lectureCredit;
+	}
 }

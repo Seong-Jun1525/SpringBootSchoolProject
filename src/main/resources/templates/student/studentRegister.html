@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Register Student</title>
-    <style>
-        .custom-container {
-            max-width: 500px;
-            margin-bottom: 50px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-sm custom-container mt-5">
+    <div class="container p-5">
         <h1>학생등록</h1>
         <form th:action="@{/students/register}" th:object="${student}" method="post">
             <div class="form-group mb-3">
@@ -37,5 +26,4 @@
             <button type="submit" class="btn btn-primary">등록하기</button>
         </form>
     </div>
-</body>
 </html>

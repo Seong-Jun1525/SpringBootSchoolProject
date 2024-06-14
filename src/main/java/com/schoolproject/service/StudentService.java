@@ -92,4 +92,9 @@ public class StudentService {
         return true;
     }
     
+    public Optional<Student> findByEnrolmentStudentInfo(String studentEmail) {
+    	// 이메일을 통해 학생 정보 가져오기
+        Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
+    	return studentOptional;
+    }
 }

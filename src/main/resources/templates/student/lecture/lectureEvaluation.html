@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	<div class="container mt-4">
+	<div class="container p-5">
         <h1>강의평가 작성</h1>
         <form th:action="@{/evaluations/register}" th:object="${evaluation}" method="post">
             <div class="mb-3">
@@ -47,21 +47,11 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="lectureCreditScore" class="form-label">학점 점수</label><br>
+                <label for="lectureCreditScore" class="form-label">학점</label><br>
                 <div th:field="*{lectureCreditScore}">
                     <input type="radio" id="creditScore3" name="lectureCreditScore" value="3"> <label for="creditScore3">3학점</label>
                     <input type="radio" id="creditScore2" name="lectureCreditScore" value="2"> <label for="creditScore2">2학점</label>
                     <input type="radio" id="creditScore1" name="lectureCreditScore" value="1"> <label for="creditScore1">1학점</label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="lectureComfortableScore" class="form-label">편의성 점수</label><br>
-                <div th:field="*{lectureComfortableScore}">
-                    <input type="radio" id="comfortableScoreA" name="lectureComfortableScore" value="A"> <label for="comfortableScoreA">A</label>
-                    <input type="radio" id="comfortableScoreB" name="lectureComfortableScore" value="B"> <label for="comfortableScoreB">B</label>
-                    <input type="radio" id="comfortableScoreC" name="lectureComfortableScore" value="C"> <label for="comfortableScoreC">C</label>
-                    <input type="radio" id="comfortableScoreD" name="lectureComfortableScore" value="D"> <label for="comfortableScoreD">D</label>
-                    <input type="radio" id="comfortableScoreF" name="lectureComfortableScore" value="F"> <label for="comfortableScoreF">F</label>
                 </div>
             </div>
             <div class="mb-3">

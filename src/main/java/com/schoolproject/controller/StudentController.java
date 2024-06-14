@@ -70,7 +70,11 @@ public class StudentController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("student") Student student,BindingResult bindingResult,Model model,HttpSession session) 
+    public String login(
+    		@ModelAttribute("student") Student student,
+    		BindingResult bindingResult,
+    		Model model,
+    		HttpSession session) 
     {
         if (bindingResult.hasErrors()) {
             throw new StudentNotFoundException("유효성 검사 오류 발생");

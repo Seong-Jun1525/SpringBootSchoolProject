@@ -29,15 +29,20 @@ public class ProfessorService {
         return professorRepository.findAll();
     }
 	
+	public String findByProfessorName(String professorEmail) {
+        Optional<Professor> professorOptional = professorRepository.findByProfessorEmail(professorEmail);
+        System.out.println("professorOptional의 값 : " + professorOptional.get().getProfessorName());
+        return professorOptional.get().getProfessorName();
+	}
+	
 	public boolean login(String email, String password) throws ProfessorLoginException {
         // 이메일을 통해 교수 정보 가져오기
         Optional<Professor> professorOptional = professorRepository.findByProfessorEmail(email);
-        
+        System.out.println("professorOptional의 값 : " + professorOptional.get().getProfessorName());
         // 교수 정보가 없거나 비밀번호가 일치하지 않으면 로그인 실패
         if (professorOptional.isEmpty() || !professorOptional.get().getProfessorPw().equals(password)) {
             throw new ProfessorLoginException("이메일 또는 패스워드가 잘못되었습니다. " + professorOptional);
         }
-
         // 로그인 성공
         return true;
     }

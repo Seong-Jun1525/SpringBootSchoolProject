@@ -7,8 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "evaluation")
 public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +27,9 @@ public class Evaluation {
     
     @Column(name = "lecture_semester", length = 20)
     private String lectureSemester;
+
+    @Column(name = "lecture_grade", columnDefinition = "int DEFAULT 1")
+    private int lectureGrade;
     
     @Column(name = "lecture_type", length = 10)
     private String lectureType;
@@ -40,9 +45,6 @@ public class Evaluation {
     
     @Column(name = "lecture_creditscore", length = 5)
     private String lectureCreditScore;
-    
-    @Column(name = "lecture_comfortablescore", length = 5)
-    private String lectureComfortableScore;
     
     @Column(name = "lecture_score", length = 5)
     private String lectureScore;
@@ -103,7 +105,15 @@ public class Evaluation {
         this.lectureSemester = lectureSemester;
     }
 
-    public String getLectureType() {
+    public int getLectureGrade() {
+		return lectureGrade;
+	}
+
+	public void setLectureGrade(int lectureGrade) {
+		this.lectureGrade = lectureGrade;
+	}
+
+	public String getLectureType() {
         return lectureType;
     }
 
@@ -141,14 +151,6 @@ public class Evaluation {
 
     public void setLectureCreditScore(String lectureCreditScore) {
         this.lectureCreditScore = lectureCreditScore;
-    }
-
-    public String getLectureComfortableScore() {
-        return lectureComfortableScore;
-    }
-
-    public void setLectureComfortableScore(String lectureComfortableScore) {
-        this.lectureComfortableScore = lectureComfortableScore;
     }
 
     public String getLectureScore() {

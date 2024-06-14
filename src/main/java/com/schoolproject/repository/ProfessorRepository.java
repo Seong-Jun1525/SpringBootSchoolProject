@@ -10,6 +10,8 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     // 교수 번호로 교수 찾기
     Optional<Professor> findByProfessorId(Long professorId);
     
+    String findByProfessorName(String professorEmail);
+    
     // 교수 이메일 주소 찾기
     Optional<Professor> findByProfessorEmail(String email);
 }

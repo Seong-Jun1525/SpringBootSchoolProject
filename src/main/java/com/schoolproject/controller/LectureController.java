@@ -1,5 +1,6 @@
 package com.schoolproject.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.schoolproject.entity.Lecture;
 import com.schoolproject.service.LectureService;
+import com.schoolproject.service.ProfessorService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 public class LectureController {
 	@Autowired
 	private LectureService lectureService;
+	@Autowired
+	private ProfessorService professorService;
 	
 	// 강의 등록 페이지
 	@GetMapping("/register")
@@ -25,7 +29,10 @@ public class LectureController {
         model.addAttribute("lecture", new Lecture());
         // 세션에서 이메일 가져오기
         String loggedInProfessorEmail = (String) session.getAttribute("loggedInProfessorEmail");
+		String professorName = professorService.findByProfessorName(loggedInProfessorEmail);
         System.out.println(loggedInProfessorEmail); // 정상적으로 저장되어있는지 콘솔에서 확인
+        System.out.println("교수 강의 등록 페이지 : " + professorName); // 정상적으로 저장되어있는지 콘솔에서 확인
+        model.addAttribute("loggedInProfessorName", professorName);
         model.addAttribute("loggedInProfessorEmail", loggedInProfessorEmail);
         return "professor/lecture/lectureRegister";
     }

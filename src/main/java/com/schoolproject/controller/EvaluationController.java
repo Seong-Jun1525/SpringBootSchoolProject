@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.schoolproject.entity.Evaluation;
+import com.schoolproject.exception.RegisterEvaluationProfessorException;
 import com.schoolproject.service.EvaluationService;
+import com.schoolproject.service.ProfessorService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,11 +22,14 @@ import jakarta.servlet.http.HttpSession;
 public class EvaluationController {
 	@Autowired
 	private EvaluationService evaluationService;
+	@Autowired
+	private ProfessorService professorService;
 	
-	// 강의평가 등록 페이지
+	// 학생 강의평가 등록 페이지
 	@GetMapping("/register")
     public String registerEvaluationForm(Model model, HttpSession session) {
         model.addAttribute("evaluation", new Evaluation());
+        
         // 세션에서 이메일 가져오기
         String loggedInStudentEmail = (String) session.getAttribute("loggedInStudentEmail");
         System.out.println(loggedInStudentEmail); // 정상적으로 저장되어있는지 콘솔에서 확인
@@ -36,6 +41,29 @@ public class EvaluationController {
     public String registerEvaluation(@ModelAttribute("evaluation") Evaluation evaluation) {
         evaluationService.registerEvaluation(evaluation);
         return "redirect:/";
+    }
+	
+	// 교수 강의평가 등록 페이지
+	@GetMapping("/professor/register")
+    public String registerEvaluationFormProfessor(Model model, HttpSession session) {
+        model.addAttribute("evaluation", new Evaluation());
+        // 세션에서 교수명 가져오기
+        String loggedInProfessorEmail = (String) session.getAttribute("loggedInProfessorEmail");
+		String professorName = professorService.findByProfessorName(loggedInProfessorEmail);
+        System.out.println("교수 강의평가 등록 페이지 : " + professorName); // 정상적으로 저장되어있는지 콘솔에서 확인
+        model.addAttribute("loggedInProfessorName", professorName);
+        return "professor/lecture/lectureEvaluationProfessor"; // 템플릿 경로
+    }
+	
+	// 교수 강의 평가 등록
+	@PostMapping("/professor/register")
+    public String registerEvaluationProfessor(@ModelAttribute("evaluation") Evaluation evaluation) {
+		try {
+			evaluationService.registerEvaluation(evaluation);
+	        return "redirect:/";
+		} catch(Exception e) {
+			throw new RegisterEvaluationProfessorException("RegisterEvaluationProfessor 에러 : " + e.getMessage());
+		}
     }
 	
 	@GetMapping("/list")

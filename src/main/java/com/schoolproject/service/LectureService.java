@@ -26,4 +26,37 @@ public class LectureService {
 	public List<Lecture> findAll() {
         return lectureRepository.findAll();
     }
+	
+	// 검색 조건에 맞는 강의 목록
+    public List<Lecture> findByEnrolmentLecture(Lecture lecture) {
+        LocalDate year = lecture.getLectureRegistrationDate();
+        String semester = lecture.getLectureSemester();
+        String major = lecture.getLectureMajor();
+        int grade = lecture.getLectureGrade();
+
+        System.out.println("-----");
+        
+        System.out.println("입력받은 값 : " + lecture.getLectureGrade());
+        System.out.println("입력받은 값 : " + lecture.getLectureMajor());
+        System.out.println("입력받은 값 : " + lecture.getLectureSemester());
+        System.out.println("입력받은 값 : " + lecture.getLectureRegistrationDate());
+
+        return lectureRepository.findByLectureRegistrationDateAndLectureSemesterAndLectureMajorAndLectureGrade(
+            year, semester, major, grade);
+    }
+    
+    // 검색 조건에 맞는 전공 강의 목록
+    public List<Lecture> findByMajorEnrolmentLecture(Lecture lecture) {
+        String major = lecture.getLectureMajor();
+        int grade = lecture.getLectureGrade();
+
+        System.out.println("-----");
+        
+        return lectureRepository.findByLectureMajorAndLectureGrade(major, grade);
+    }
+    
+    // 전공수강신청 강의데이터 불러오기
+    public List<Lecture> findByLectureMajorAndLectureGrade(String major, int grade) {
+    	return lectureRepository.findByLectureMajorAndLectureGrade(major, grade);
+    }
 }

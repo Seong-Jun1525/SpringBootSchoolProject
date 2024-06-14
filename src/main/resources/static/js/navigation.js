@@ -35,3 +35,22 @@ function loadContent(event) {
         console.error('Error fetching content:', error);
     });
 }
+
+function loadSearchContent(event) {
+    event.preventDefault();
+    const form = document.getElementById('searchForm');
+    const formData = new FormData(form);
+    const url = event.target.getAttribute('data-url');
+    
+    fetch(url, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('search-content').innerHTML = data;
+    })
+    .catch(error => {
+        console.error('Error fetching content:', error);
+    });
+}
