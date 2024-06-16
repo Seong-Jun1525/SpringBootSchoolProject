@@ -31,7 +31,7 @@ public class Student {
     @Column(name = "student_class", nullable = false, columnDefinition = "int default 0")
     private Integer studentClass;
     
-    @Column(name = "student_email", nullable = false, unique = true, columnDefinition = "varchar(100) default ''")
+    @Column(name = "student_email", nullable = false, columnDefinition = "varchar(100) default ''")
     private String studentEmail;
 
     @Column(name = "student_pw", nullable = false, columnDefinition = "varchar(20) default ''")

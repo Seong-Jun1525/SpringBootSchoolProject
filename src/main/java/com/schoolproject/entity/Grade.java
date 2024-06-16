@@ -19,7 +19,7 @@ public class Grade {
     private Long gradeId;
 
     @Column(name = "student_number", nullable = false)
-    private int studentNumber;
+    private Integer studentNumber;
     
     @Column(name = "student_email", length = 100)
     private String studentEmail;
@@ -47,11 +47,11 @@ public class Grade {
 		this.gradeId = gradeId;
 	}
 
-	public int getStudentNumber() {
+	public Integer getStudentNumber() {
 		return studentNumber;
 	}
 
-	public void setStudentNumber(int studentNumber) {
+	public void setStudentNumber(Integer studentNumber) {
 		this.studentNumber = studentNumber;
 	}
 	
