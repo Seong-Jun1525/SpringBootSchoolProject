@@ -1,6 +1,7 @@
 package com.schoolproject.service;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public class StudentService {
     }
 
     public Student registerStudent(Student student) {
+    	
+    	generateStudentNumber(student);
     	// 만약 학번이 이미 등록되어 있을 경우
         if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
             throw new AlreadyExistsStudentException("이미 존재하는 학번입니다.");
@@ -51,10 +54,38 @@ public class StudentService {
         if (student.getStudentRegistrationDate() == null) {
             student.setStudentRegistrationDate(LocalDate.now());
         }
+        
+        
 
         return studentRepository.save(student);
     }
 
+    private void generateStudentNumber(Student student) {
+        // 현재 연도 가져오기
+        int currentYear = LocalDate.now().getYear();
+
+        // 전공에 따라 학번 생성
+        String studentMajor = student.getStudentMajor();
+        int sequence = studentRepository.countByStudentMajor(studentMajor) + 1;
+        String studentNumberStr = String.format("%d%s%03d", currentYear, getPrefixForMajor(studentMajor), sequence);
+        
+        // String을 Integer로 변환
+        Integer studentNumber = Integer.parseInt(studentNumberStr);
+        student.setStudentNumber(studentNumber);
+    }
+
+    private String getPrefixForMajor(String studentMajor) {
+        // 각 전공에 따른 학번 접두사 설정
+        if ("컴퓨터소프트웨어공학".equals(studentMajor)) {
+            return "07";
+        } else if ("전자공학".equals(studentMajor)) {
+            return "08";
+        } else if ("경영학".equals(studentMajor)) {
+            return "09";
+        } else {
+            throw new IllegalArgumentException("지원되지 않는 전공입니다.");
+        }
+    }
     
     public Student updateStudent(Student student) {
         Optional<Student> existingStudentOpt = studentRepository.findByStudentNumberAndStudentMajor(
@@ -79,6 +110,8 @@ public class StudentService {
         return studentRepository.findAll();
     }
     
+    
+    
     public boolean login(String email, String password) throws StudentNotFoundException {
         // 이메일을 통해 학생 정보 가져오기
         Optional<Student> studentOptional = studentRepository.findByStudentEmail(email);
@@ -97,4 +130,5 @@ public class StudentService {
         Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
     	return studentOptional;
     }
+    
 }
