@@ -1,17 +1,12 @@
 package com.schoolproject.service;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.schoolproject.entity.Grade;
-import com.schoolproject.entity.Lecture;
-import com.schoolproject.entity.Student;
 import com.schoolproject.repository.GradeRepository;
-import com.schoolproject.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 
 @Service

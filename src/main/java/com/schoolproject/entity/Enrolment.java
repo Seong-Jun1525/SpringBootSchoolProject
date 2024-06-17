@@ -10,13 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "enrolmentone")
-public class EnrolmentOne {
+@Table(name = "enrolment")
+public class Enrolment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "major_enrolment_id")
-    private int majorEnrolmentId;
+    @Column(name = "enrolment_id")
+    private Long enrolmentId;
 
     @Column(name = "student_number", nullable = false)
     private int studentNumber;
@@ -26,6 +26,9 @@ public class EnrolmentOne {
 
     @Column(name = "student_major", nullable = false, length = 100)
     private String studentMajor;
+
+    @Column(name = "student_point", columnDefinition = "int default 15")
+    private int studentPoint;
 
     @Column(name = "lecture_name", nullable = false, length = 100)
     private String lectureName;
@@ -41,14 +44,34 @@ public class EnrolmentOne {
 
     @Column(name = "lecture_type", nullable = false, length = 20, columnDefinition = "varchar(20) default '전공'")
     private String lectureType = "전공";
+    
+    public Enrolment() {
+		// TODO Auto-generated constructor stub
+	}
+    
+	public Enrolment(Long enrolmentId, int studentNumber, String studentName, String studentMajor, int studentPoint,
+			String lectureName, String lectureSemester, LocalDateTime lectureDate, int lectureCredit,
+			String lectureType) {
+		super();
+		this.enrolmentId = enrolmentId;
+		this.studentNumber = studentNumber;
+		this.studentName = studentName;
+		this.studentMajor = studentMajor;
+		this.studentPoint = studentPoint;
+		this.lectureName = lectureName;
+		this.lectureSemester = lectureSemester;
+		this.lectureDate = lectureDate;
+		this.lectureCredit = lectureCredit;
+		this.lectureType = lectureType;
+	}
 
-    // Getters and Setters
-    public int getMajorEnrolmentId() {
-        return majorEnrolmentId;
+	// Getters and Setters
+    public Long getEnrolmentId() {
+        return enrolmentId;
     }
 
-    public void setMajorEnrolmentId(int majorEnrolmentId) {
-        this.majorEnrolmentId = majorEnrolmentId;
+    public void setEnrolmentId(Long enrolmentId) {
+        this.enrolmentId = enrolmentId;
     }
 
     public int getStudentNumber() {
@@ -75,7 +98,15 @@ public class EnrolmentOne {
         this.studentMajor = studentMajor;
     }
 
-    public String getLectureName() {
+    public int getStudentPoint() {
+		return studentPoint;
+	}
+
+	public void setStudentPoint(int studentPoint) {
+		this.studentPoint = studentPoint;
+	}
+
+	public String getLectureName() {
         return lectureName;
     }
 

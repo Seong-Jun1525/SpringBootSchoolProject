@@ -6,7 +6,7 @@
             
             <div class="form-group mb-3">
                 <label for="studentMajor">전공</label>
-                <input type="text" class="form-control" id="studentMajor" th:field="*{studentMajor}" required/>
+                <input type="text" class="form-control" id="studentMajor" th:field="*{studentMajor}" placeholder="컴퓨터소프트웨어공학" required/>
             </div>
             <div class="form-group mb-3">
                 <label for="studentGrade">학년</label>
@@ -15,10 +15,6 @@
             <div class="form-group mb-3">
                 <label for="studentClass">반</label>
                 <input type="number" class="form-control" id="studentClass" th:field="*{studentClass}" required/>
-            </div>
-            <div class="form-group mb-3">
-                <label for="studentPoint">포인트</label>
-                <input type="number" class="form-control" id="studentPoint" th:field="*{studentPoint}" required/>
             </div>
             <button type="submit" class="btn btn-primary">등록하기</button>
         </form>

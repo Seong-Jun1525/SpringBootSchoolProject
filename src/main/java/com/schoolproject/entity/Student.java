@@ -46,7 +46,7 @@ public class Student {
     @Column(name = "student_gender", nullable = false, columnDefinition = "varchar(10) default ''")
     private String studentGender;
     
-    @Column(name = "student_point", nullable = false, columnDefinition = "int default 0")
+    @Column(name = "student_point", nullable = false, columnDefinition = "int default 15")
     private Integer studentPoint;
     
     @Column(name = "student_registration_date", nullable = false, columnDefinition = "date default '1970-01-01'")

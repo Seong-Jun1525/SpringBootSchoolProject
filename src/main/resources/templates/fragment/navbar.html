@@ -91,6 +91,9 @@
 				<li>
 					<a class="dropdown-item" href="#" th:data-url="@{/enrolments/secondEnrolment}" onclick="loadContent(event)">추가수강신청</a>
 				</li>
+				<li>
+					<a class="dropdown-item" href="#" th:data-url="@{/enrolments/enrolmentList}" onclick="loadContent(event)">수강신청현황</a>
+				</li>
 		    </ul>
 		</li>
         <li th:if="${session.loggedInStudent == null and session.loggedInProfessor == null }" class="nav-item">

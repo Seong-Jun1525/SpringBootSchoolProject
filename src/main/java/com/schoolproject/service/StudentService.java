@@ -1,7 +1,6 @@
 package com.schoolproject.service;
 
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,15 +47,15 @@ public class StudentService {
         if (student.getStudentPhone() == null) {
             student.setStudentPhone("");
         }
+        if (student.getStudentPoint() == null) {
+            student.setStudentPoint(15);
+        }
         if (student.getStudentGender() == null) {
             student.setStudentGender("");
         }
         if (student.getStudentRegistrationDate() == null) {
             student.setStudentRegistrationDate(LocalDate.now());
         }
-        
-        
-
         return studentRepository.save(student);
     }
 

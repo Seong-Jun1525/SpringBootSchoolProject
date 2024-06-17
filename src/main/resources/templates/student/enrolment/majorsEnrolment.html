@@ -11,6 +11,9 @@
 					<div class="ms-3">
 						<input type="number" class="form-control" id="studentGrade" th:field="*{lectureGrade}" placeholder="학년" />
 					</div>
+					<div class="ms-3">
+						<input type="hidden" class="form-control" id="lectureType" name="lectureType" value="전공" />
+					</div>
 					<button class="ms-3 btn btn-primary" href="#" th:data-url="@{/enrolments/majorsEnrolment/search}" onclick="loadSearchContent(event)">검색</button>
 				</div>
 			</form>

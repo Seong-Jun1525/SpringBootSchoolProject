@@ -1,0 +1,33 @@
+<html th:fragment="enrolmentResultsFragment" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${#lists.isEmpty(enrolments)}">
+        <p>등록된 데이터가 없습니다</p>
+    </div>
+	<div th:unless="${#lists.isEmpty(enrolments)}">
+		<table class="table table-striped">
+			<thead>
+				<tr class="table-success">
+					<th>NUM</th>
+					<th>학생명</th>
+					<th>학번</th>
+					<th>강의명</th>
+					<th>학점</th>
+					<th>학기</th>
+					<th>분류</th>
+					<th>포인트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="enrolment : ${enrolments}">
+					<td th:text="${enrolment.enrolmentId}"></td>
+					<td th:text="${enrolment.studentName}"></td>
+					<td th:text="${enrolment.studentNumber}"></td>
+					<td th:text="${enrolment.lectureName}"></td>
+					<td th:text="${enrolment.lectureCredit}"></td>
+					<td th:text="${enrolment.lectureSemester}"></td>
+					<td th:text="${enrolment.lectureType}"></td>
+					<td th:text="${enrolment.studentPoint}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</html>

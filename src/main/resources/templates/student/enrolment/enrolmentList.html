@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="container p-5 d-flex flex-column">
+		<div class="mb-3">
+			<h3>수강신청 현황</h3>
+			<form id="searchForm" th:action="@{/enrolments/search}" th:object="${enrolment}" method="post">
+				<div class="d-flex justify-content-between">
+					<div>
+						<label for="studentNumber" class="form-label">학번</label>
+						<input type="number" class="form-control" id="studentNumber" th:field="*{studentNumber}" placeholder="학번" />
+					</div>
+					<div>
+						<label for="lectureSemester" class="form-label">학기</label>
+						<input type="text" class="form-control" id="lectureSemester" th:field="*{lectureSemester}" placeholder="1학기" />
+					</div>
+				</div>
+				<button class="float-end mt-3 btn btn-primary" href="#" th:data-url="@{/enrolments/enrolmentList/search}" onclick="loadSearchContent(event)">검색</button>
+			</form>
+		</div>
+		<main id="search-content" class="w-100" layout:fragment="content">
+	        <!-- 삽입될 내용 -->
+			<div th:include="student/enrolment/enrolmentResults :: enrolmentResultsFragment"></div>
+	    </main>
+	</div>
+</html>

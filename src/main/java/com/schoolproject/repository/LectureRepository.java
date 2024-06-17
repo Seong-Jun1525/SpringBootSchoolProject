@@ -11,5 +11,5 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
 	List<Lecture> findByLectureRegistrationDateAndLectureSemesterAndLectureMajorAndLectureGrade(
 	        LocalDate lectureRegistrationDate, String lectureSemester, String lectureMajor, int lectureGrade);
 	
-	List<Lecture> findByLectureMajorAndLectureGrade(String lectureMajor, int lectureGrade);
+	List<Lecture> findByLectureMajorAndLectureGradeAndLectureType(String lectureMajor, int lectureGrade, String lectureType);
 }

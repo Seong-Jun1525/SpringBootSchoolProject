@@ -49,14 +49,15 @@ public class LectureService {
     public List<Lecture> findByMajorEnrolmentLecture(Lecture lecture) {
         String major = lecture.getLectureMajor();
         int grade = lecture.getLectureGrade();
+        String type = lecture.getLectureType();
 
         System.out.println("-----");
         
-        return lectureRepository.findByLectureMajorAndLectureGrade(major, grade);
+        return lectureRepository.findByLectureMajorAndLectureGradeAndLectureType(major, grade, type);
     }
     
     // 전공수강신청 강의데이터 불러오기
-    public List<Lecture> findByLectureMajorAndLectureGrade(String major, int grade) {
-    	return lectureRepository.findByLectureMajorAndLectureGrade(major, grade);
+    public List<Lecture> findByLectureMajorAndLectureGrade(String major, int grade, String type) {
+    	return lectureRepository.findByLectureMajorAndLectureGradeAndLectureType(major, grade, type);
     }
 }
