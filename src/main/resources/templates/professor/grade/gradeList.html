@@ -20,6 +20,9 @@
                     <td th:text="${grade.lectureName}"></td>
                     <td th:text="${grade.professorEmail}"></td>
                     <td th:text="${grade.score}"></td>
+                    <td th:if="${session.loggedInProfessor != null}">
+						<a th:href="@{/grades/edit/{id}(id=${grade.gradeId})}" class="btn btn-primary">수정</a>
+					</td>
                 </tr>
             </tbody>
         </table>

@@ -84,6 +84,10 @@ public class StudentController {
             if (loginSuccess) {
                 // 로그인 성공 시 다음 페이지로 리다이렉트 또는 모델에 추가 정보 전달 가능
                 System.out.println(student + " " + student.getStudentEmail());
+                
+                String studentEmail = (String) student.getStudentEmail();
+                String studentInfo = studentService.findBystudentName(studentEmail);
+                
                 session.setAttribute("loggedInStudent", student);
                 // 로그인 성공 시 세션에 이메일 저장
                 session.setAttribute("loggedInStudentEmail", student.getStudentEmail());
