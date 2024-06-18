@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.schoolproject.entity.Professor;
 import com.schoolproject.entity.Student;
 import com.schoolproject.exception.AlreadyExistsStudentException;
 import com.schoolproject.exception.StudentNotFoundException;
@@ -109,7 +110,11 @@ public class StudentService {
         return studentRepository.findAll();
     }
     
-    
+    public String findBystudentName(String studentEmail) {
+        Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
+        System.out.println("StudentOptional의 값 : " + studentOptional.get().getStudentName());
+        return studentOptional.get().getStudentName();
+	}
     
     public boolean login(String email, String password) throws StudentNotFoundException {
         // 이메일을 통해 학생 정보 가져오기

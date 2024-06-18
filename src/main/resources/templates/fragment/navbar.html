@@ -5,8 +5,11 @@
     </a>
 	<ul class="navbar-nav d-flex flex-row justify-content-evenly" style="width: 100%;">
         <!-- 로그인된 경우 표시 -->
-        <li th:if="${session.loggedInProfessor != null}" class="nav-item">
+        <li th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" class="nav-item">
           <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInProfessor.getProfessorEmail(), '@')} + '님'">email</a>
+        </li>
+        <li th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" class="nav-item">
+          <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInStudent.getStudentEmail(), '@')} + '님'">email</a>
         </li>
         <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
           <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>

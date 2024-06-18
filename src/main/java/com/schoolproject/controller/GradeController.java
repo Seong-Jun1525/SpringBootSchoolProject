@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +44,34 @@ public class GradeController {
         	 model.addAttribute("errorMessage", "이미 정보가 들어간 학생입니다.");
             return "redirect:/error";
         }
+    }
+    
+    // 성적 수정 처리
+    @GetMapping("/edit/{id}")
+    public String editGrade(@PathVariable("id") Long gradeId, Model model) {
+        Grade grade = gradeService.getGradeById(gradeId);
+        model.addAttribute("grade", grade);
+        return "professor/grade/gradeUpdate"; //
+    }
+
+    // 수정된 성적 정보 저장
+    @PostMapping("/update")
+    public String updateGrade(@ModelAttribute("grade") Grade updateGrade) {
+    	
+    	if (updateGrade.getGradeId() == null) {
+            throw new IllegalArgumentException("Grade ID cannot be null");
+        }
+    	
+    	Grade existingGrade = gradeService.getGradeById(updateGrade.getGradeId());
+    	existingGrade.setCredit(updateGrade.getCredit());
+        existingGrade.setGradeDate(updateGrade.getGradeDate());
+        existingGrade.setLectureName(updateGrade.getLectureName());
+        existingGrade.setProfessorEmail(updateGrade.getProfessorEmail());
+        existingGrade.setScore(updateGrade.getScore());
+        existingGrade.setStudentEmail(updateGrade.getStudentEmail());
+        existingGrade.setStudentNumber(updateGrade.getStudentNumber());
+        gradeService.updateGrade(existingGrade);
+        return "redirect:/"; // 수정 후 성적 목록 페이지로 리다이렉트
     }
     
     // 성적 목록 불러오기

@@ -19,5 +19,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student save(Student student);
     
     int countByStudentMajor(String studentMajor);
+    
+    String findByStudentName(String StudentEmail);
 }
 
