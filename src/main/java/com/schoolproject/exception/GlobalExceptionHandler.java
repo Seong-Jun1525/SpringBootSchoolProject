@@ -46,4 +46,20 @@ public class GlobalExceptionHandler {
         modelAndView.addObject("errorMessage", ex.getMessage());
         return modelAndView;
     }
+    
+    // 학생 포인트 없을 때 exception
+    @ExceptionHandler(StudentPointException.class)
+    public ModelAndView handleStudentPointException(StudentPointException ex) {
+        ModelAndView modelAndView = new ModelAndView("error/error");
+        modelAndView.addObject("errorMessage", ex.getMessage());
+        return modelAndView;
+    }
+    
+    // 수강신청 데이터가 없을 때 exception
+    @ExceptionHandler(IsEmptyEnrolmentException.class)
+    public ModelAndView handleIsEmptyEnrolmentException(IsEmptyEnrolmentException ex) {
+        ModelAndView modelAndView = new ModelAndView("error/error");
+        modelAndView.addObject("errorMessage", ex.getMessage());
+        return modelAndView;
+    }
 }

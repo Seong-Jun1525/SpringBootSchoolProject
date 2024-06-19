@@ -1,119 +1,125 @@
 <nav th:fragment="navbarFragment" class="navbar p-3 bg-success">
-  <div class="container d-flex flex-column align-items-start justify-content-start">
-    <a class="navbar-brand logo-link mb-4" th:href="@{/}">
-      	<img src="imgs/nav-logo.png" class="logo" /> 유한포털시스템
-    </a>
-	<ul class="navbar-nav d-flex flex-row justify-content-evenly" style="width: 100%;">
-        <!-- 로그인된 경우 표시 -->
-        <li th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" class="nav-item">
-          <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInProfessor.getProfessorEmail(), '@')} + '님'">email</a>
-        </li>
-        <li th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" class="nav-item">
-          <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInStudent.getStudentEmail(), '@')} + '님'">email</a>
-        </li>
-        <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
-          <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
-        </li>
-        <!-- 로그인이 되지 않은 경우 표시 -->
-        <li th:if="${session.loggedInProfessor == null and session.loggedInStudent == null}" class="nav-item dropdown">
-        	<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-			  로그인
-			</button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" th:href="@{/professors/login}">교수 로그인</a></li>
-              <li><a class="dropdown-item" th:href="@{/students/login}">학생 로그인</a></li>
-            </ul>
-        </li>
-      </ul>
-      <form class="d-flex" role="search" style="margin-bottom: 10px;">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-    <!--
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    -->
-    <div class="collapse navbar-collapse d-flex flex-column" id="navbarSupportedContent">
-      <ul class="nav nav-pills d-flex flex-column me-auto mb-2 mb-lg-0">
-		 <li th:if="${session.loggedInProfessor != null}" class="nav-item dropdown">
-		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-				등록
-			</a>
-		    <ul class="dropdown-menu">
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/students/register}" onclick="loadContent(event)">학생등록</a>
+	<div class="container d-flex flex-column align-items-start justify-content-start">
+		<a class="navbar-brand logo-link mb-4" th:href="@{/}">
+		  	<img src="imgs/nav-logo.png" class="logo" /> 유한포털시스템
+		</a>
+		<ul class="navbar-nav d-flex flex-column" style="width: 100%;">
+		    <!-- 로그인된 경우 표시 -->
+		    <li th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" class="nav-item" style="color: white;">
+		      <b><a class="nav-link d-inline" th:text="${session.loggedInProfessorName}+'교수'">name</a></b>님 안녕하세요
+		    </li>
+		    <li th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" class="nav-item">
+		      <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInStudent.getStudentEmail(), '@')} + '님'">email</a>
+		    </li>
+		    <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
+		      <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
+		    </li>
+		    <!-- //로그인된 경우 표시 -->
+		    <!-- 로그인이 되지 않은 경우 표시 -->
+		    <li th:if="${session.loggedInProfessor == null and session.loggedInStudent == null}" class="nav-item dropdown">
+		    	<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				  로그인
+				</button>
+		        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		          <li><a class="dropdown-item" th:href="@{/professors/login}">교수 로그인</a></li>
+		          <li><a class="dropdown-item" th:href="@{/students/login}">학생 로그인</a></li>
+		        </ul>
+		    </li>
+		    <!-- //로그인이 되지 않은 경우 표시 -->
+		</ul>
+		<form class="d-flex" role="search" style="margin-bottom: 10px;">
+			<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-primary" type="submit">Search</button>
+		</form>
+		<div class="collapse navbar-collapse d-flex flex-column" id="navbarSupportedContent">
+			<ul class="nav nav-pills d-flex flex-column me-auto mb-2 mb-lg-0">
+				<!-- 교수로 로그인 했을 때 메뉴 -->
+				<li th:if="${session.loggedInProfessor != null}" class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+						등록
+					</a>
+				    <ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/students/register}" onclick="loadContent(event)">학생등록</a>
+						</li>
+						<li>
+						  	<a class="dropdown-item" href="#" th:data-url="@{/professors/register}" onclick="loadContent(event)">교수등록</a>
+						</li>
+						<li>
+						  	<a class="dropdown-item" href="#" th:data-url="@{/lectures/register}" onclick="loadContent(event)">강의등록</a>
+						</li>
+						<li>
+						  	<a class="dropdown-item" href="#" th:data-url="@{/grades/input}" onclick="loadContent(event)">성적등록</a>
+						</li>
+						<li>
+						  	<a class="dropdown-item" href="#" th:data-url="@{/evaluations/professor/register}" onclick="loadContent(event)">강의평가등록</a>
+						</li>
+				    </ul>
 				</li>
-				<li>
-				  	<a class="dropdown-item" href="#" th:data-url="@{/professors/register}" onclick="loadContent(event)">교수등록</a>
+				<li th:if="${session.loggedInProfessor != null}" class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+						목록
+					</a>
+				    <ul class="dropdown-menu" >
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
+						</li>
+						<li>
+				  			<a class="dropdown-item" href="#" th:data-url="@{/professors/list}" onclick="loadContent(event)">교수목록</a>
+						</li>
+						<li>
+				  			<a class="dropdown-item" href="#" th:data-url="@{/lectures/list}" onclick="loadContent(event)">강의목록</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
+						</li>
+				    </ul>
 				</li>
-				<li>
-				  	<a class="dropdown-item" href="#" th:data-url="@{/lectures/register}" onclick="loadContent(event)">강의등록</a>
+				<!-- //교수로 로그인 했을 때 메뉴 -->
+				
+				<!-- 학생으로 로그인 했을 때 메뉴 -->
+				<li th:if="${session.loggedInStudent != null}" class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+						수강신청
+					</a>
+				    <ul class="dropdown-menu" >
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/enrolments/lectureList}" onclick="loadContent(event)">개설강의 조회</a>
+						</li>
+						<li>
+				  			<a class="dropdown-item" href="#" th:data-url="@{/enrolments/majorsEnrolment}" onclick="loadContent(event)">전공수강신청</a>
+						</li>
+						<li>
+				  			<a class="dropdown-item" href="#" th:data-url="@{/enrolments/liberalArtsEnrolment}" onclick="loadContent(event)">교양수강신청</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/enrolments/secondEnrolment}" onclick="loadContent(event)">추가수강신청</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#" th:data-url="@{/enrolments/enrolmentList}" onclick="loadContent(event)">수강신청현황</a>
+						</li>
+				    </ul>
 				</li>
-				<li>
-				  	<a class="dropdown-item" href="#" th:data-url="@{/grades/input}" onclick="loadContent(event)">성적등록</a>
+				<!-- 강의 평가 메뉴 -> 평가 목록 끝에 버튼으로 이동
+				<li th:if="${session.loggedInStudent != null}" class="nav-item">
+				  <a class="nav-link" href="#" th:data-url="@{/evaluations/register}" onclick="loadContent(event)">강의평가</a>
 				</li>
-				<li>
-				  	<a class="dropdown-item" href="#" th:data-url="@{/evaluations/professor/register}" onclick="loadContent(event)">강의평가등록</a>
+				-->
+				<li th:if="${session.loggedInStudent != null}" class="nav-item">
+				  <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
 				</li>
-		    </ul>
-		</li>
-		<li th:if="${session.loggedInProfessor != null}" class="nav-item dropdown">
-		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-				목록
-			</a>
-		    <ul class="dropdown-menu" >
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/students/list}" onclick="loadContent(event)">학생목록</a>
+				<li th:if="${session.loggedInStudent != null}" class="nav-item">
+					<a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
 				</li>
-				<li>
-          			<a class="dropdown-item" href="#" th:data-url="@{/professors/list}" onclick="loadContent(event)">교수목록</a>
+				<!-- //학생으로 로그인 했을 때 메뉴 -->
+				
+				<!-- 로그인을 하지 않았을 경우의 메뉴 -->
+				<li th:if="${session.loggedInStudent == null and session.loggedInProfessor == null }" class="nav-item">
+				  <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
 				</li>
-				<li>
-          			<a class="dropdown-item" href="#" th:data-url="@{/lectures/list}" onclick="loadContent(event)">강의목록</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
-				</li>
-		    </ul>
-		</li>
-		<li th:if="${session.loggedInStudent != null}" class="nav-item dropdown">
-		    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-				수강신청
-			</a>
-		    <ul class="dropdown-menu" >
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/enrolments/lectureList}" onclick="loadContent(event)">개설강의 조회</a>
-				</li>
-				<li>
-          			<a class="dropdown-item" href="#" th:data-url="@{/enrolments/majorsEnrolment}" onclick="loadContent(event)">전공수강신청</a>
-				</li>
-				<li>
-          			<a class="dropdown-item" href="#" th:data-url="@{/enrolments/liberalArtsEnrolment}" onclick="loadContent(event)">교양수강신청</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/enrolments/secondEnrolment}" onclick="loadContent(event)">추가수강신청</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#" th:data-url="@{/enrolments/enrolmentList}" onclick="loadContent(event)">수강신청현황</a>
-				</li>
-		    </ul>
-		</li>
-        <li th:if="${session.loggedInStudent == null and session.loggedInProfessor == null }" class="nav-item">
-          <a class="nav-link" href="#" th:data-url="@{/students/update}" onclick="loadContent(event)">회원가입</a>
-        </li>
-        <!-- 강의 평가 메뉴 -> 평가 목록 끝에 버튼으로 이동
-        <li th:if="${session.loggedInStudent != null}" class="nav-item">
-          <a class="nav-link" href="#" th:data-url="@{/evaluations/register}" onclick="loadContent(event)">강의평가</a>
-        </li>
-        -->
-        <li th:if="${session.loggedInStudent != null}" class="nav-item">
-          <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
-        </li>
-        <li th:if="${session.loggedInStudent != null}" class="nav-item">
-			<a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
-		</li>
-      </ul>
-    </div>
-  </div>
+				<!-- //로그인을 하지 않았을 경우의 메뉴 -->
+			</ul>
+		</div>
+		
+	</div>
 </nav>

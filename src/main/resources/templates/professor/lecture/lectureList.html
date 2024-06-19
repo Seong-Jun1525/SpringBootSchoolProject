@@ -8,7 +8,6 @@
                     <th>강의명</th>
                     <th>학과</th>
                     <th>담당 교수명</th>
-                    <th>담당 교수 이메일</th>
                     <th>수강 학년</th>
                     <th>수강 학기</th>
                     <th>학점</th>
@@ -16,15 +15,15 @@
                     <th>강의 유형</th>
                     <th>강의 요일</th>
                     <th>강의 등록일</th>
+                    <th>수강신청현황</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="lecture : ${lectures}">
-					<td th:text="${lecture.lectureId}">1</td>
-                    <td th:text="${lecture.lectureMajor}">학과</td>
+                <tr th:each="lecture, rowStat : ${lectures}">
+					<td th:text="${rowStat.index + 1}">1</td>
                     <td th:text="${lecture.lectureName}">Introduction to Computer Science</td>
+                    <td th:text="${lecture.lectureMajor}">학과</td>
                     <td th:text="${lecture.professorName}">교수명</td>
-                    <td th:text="${lecture.professorEmail}">john.doe@example.com</td>
                     <td th:text="${lecture.lectureGrade}">1학년</td>
                     <td th:text="${lecture.lectureSemester}">1학기</td>
                     <td th:text="${lecture.lectureCredit}">학점</td>
@@ -32,6 +31,15 @@
                     <td th:text="${lecture.lectureType}">전공</td>
                     <td th:text="${lecture.lectureLectureDay}">월, 수</td>
                     <td th:text="${lecture.lectureRegistrationDate}">2024-01-01</td>
+                    <td>
+                        <a 
+                            class="btn btn-primary" 
+							th:data-url="@{/enrolments/professor/list(lectureName=${lecture.lectureName}, lectureId=${rowStat.index + 1}, lectureType=${lecture.lectureType})}"
+							onclick="loadContent(event)"
+                        >
+                            현황보기
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

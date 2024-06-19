@@ -40,8 +40,14 @@ public class Lecture {
     @Column(name = "lecture_registration_date", columnDefinition = "DATE DEFAULT '1970-01-01'")
     private LocalDate lectureRegistrationDate;
     
-    @Column(name="lecture_credit", nullable = false, columnDefinition = "INT DEFAULT 0")
+    @Column(name = "lecture_credit", nullable = false, columnDefinition = "INT DEFAULT 0")
     private int lectureCredit;
+    
+    @Column(name = "deadline", columnDefinition = "TINYINT DEFAULT 0")
+    private int deadline;
+    
+    @Column(name = "student_count", columnDefinition = "INT DEFAULT 0")
+    private int studentCount;
 
     // Getters and Setters
 
@@ -139,5 +145,21 @@ public class Lecture {
 
 	public void setLectureCredit(int lectureCredit) {
 		this.lectureCredit = lectureCredit;
+	}
+
+	public int getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(int deadline) {
+		this.deadline = deadline;
+	}
+
+	public int getStudentCount() {
+		return studentCount;
+	}
+
+	public void setStudentCount(int studentCount) {
+		this.studentCount = studentCount;
 	}
 }

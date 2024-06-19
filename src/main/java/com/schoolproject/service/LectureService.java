@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.schoolproject.entity.Lecture;
 import com.schoolproject.repository.LectureRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class LectureService {
 	private final LectureRepository lectureRepository;
@@ -60,4 +62,13 @@ public class LectureService {
     public List<Lecture> findByLectureMajorAndLectureGrade(String major, int grade, String type) {
     	return lectureRepository.findByLectureMajorAndLectureGradeAndLectureType(major, grade, type);
     }
+
+    @Transactional
+    public void updateLectureDeadline(String lectureName, int i) {
+        lectureRepository.updateDeadline(lectureName, i);
+    }
+
+	public List<Lecture> findByLectureName(String lectureName) {
+		return lectureRepository.findByLectureName(lectureName);
+	}
 }

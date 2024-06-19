@@ -76,13 +76,14 @@ public class ProfessorController {
         		System.out.println("이메일 : " + professor.getProfessorEmail());
         		
         		String professorEmail = (String) professor.getProfessorEmail();
-        		String professorInfo = professorService.findByProfessorName(professorEmail);
+        		String professorName = professorService.findByProfessorName(professorEmail);
         		
-        		System.out.println("이름 : " + professorInfo);
+        		System.out.println("이름 : " + professorName);
         		
                 session.setAttribute("loggedInProfessor", professor);
                 // 로그인 성공 시 세션에 이메일 저장
                 session.setAttribute("loggedInProfessorEmail", professor.getProfessorEmail());
+                session.setAttribute("loggedInProfessorName", professorName);
                 return "redirect:/";
             } else {
                 // 이 부분은 도달하지 않음, 예외가 발생할 것이기 때문

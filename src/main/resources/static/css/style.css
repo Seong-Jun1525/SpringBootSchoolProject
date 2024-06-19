@@ -3,6 +3,10 @@ nav {
 	min-height: 100vh;
 }
 
+b {
+	font-size: 20px;
+}
+
 .logo {
 	width: 50px;
 }

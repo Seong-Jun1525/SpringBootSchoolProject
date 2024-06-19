@@ -1,6 +1,7 @@
 package com.schoolproject.controller;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.schoolproject.entity.Enrolment;
 import com.schoolproject.entity.Lecture;
 import com.schoolproject.entity.Student;
+import com.schoolproject.exception.IsEmptyEnrolmentException;
 import com.schoolproject.exception.StudentNotFoundException;
 import com.schoolproject.exception.StudentPointException;
 import com.schoolproject.service.EnrolmentService;
@@ -271,7 +273,6 @@ public class EnrolmentController {
 	        else {
 		        throw new StudentPointException("포인트가 부족합니다.");
 	        }
-
 	        return "redirect:/"; // 성공적으로 수강신청 후 메인 페이지로 리다이렉트
 	    } catch (Exception e) {
 	        throw new StudentNotFoundException(e.getMessage());
@@ -284,4 +285,57 @@ public class EnrolmentController {
 	public String showSecondEnrolment() {
 		return "student/enrolment/secondEnrolment";
 	}
+	
+	// 교수 내 과목 수강신청 현황보기
+	/** TODO
+	 * 여기서 해야할 것 '마감'버튼을 클릭하면
+	 * lecture 테이블의 lecture_capacity(수강정원)의 값을 가져와서
+	 * 그 값만큼 수강신청현황에서 짜르고
+	 * 나머지 인원들에게 알림을 보낸다
+	 * 
+	 */
+	@GetMapping("/professor/list")
+    public String showEnrolmentStudentList(
+            Model model,
+            @RequestParam("lectureId") int lectureId,
+            @RequestParam("lectureName") String lectureName,
+            @RequestParam("lectureType") String lectureType) {
+        System.out.println("강의ID : " + lectureId);
+        System.out.println("강의명 : " + lectureName);
+        System.out.println("강의분류 : " + lectureType);
+        
+        List<Enrolment> enrolmentStudentList = enrolmentService.findByEnrolmentStudentList(lectureName);
+        /** studentPoint 값을 기준으로 내림차순 정렬
+         * Comparator : 자바 객체 비교 인터페이스
+         * comparingInt: 정수 값을 기준으로 비교
+         * 메서드 레퍼런스 (T :: 값) : 정수값을 반환(여기서는 studentPoint)
+         * reversed : 내림차순
+         */
+    	if(!enrolmentStudentList.isEmpty()) {
+            enrolmentStudentList.sort(Comparator.comparingInt(Enrolment::getStudentPoint).reversed());
+            model.addAttribute("lectureName", enrolmentStudentList.get(lectureId-1).getLectureName());
+            model.addAttribute("enrolments", enrolmentStudentList);
+            return "professor/enrolment/myStudentList";
+    	} else {
+    		System.out.println("수강신청 데이터가 없습니다.");
+        	throw new IsEmptyEnrolmentException("수강신청 데이터가 없습니다.");
+    	}
+        
+    }
+	
+	@PostMapping("/professor/deadline")
+    public String deadlineRegistration(@RequestParam("lectureName") String lectureName, Enrolment enrolment) {
+        lectureService.updateLectureDeadline(lectureName, 1); // deadline 값 1로 변경해서 수강신청 마감
+
+        List<Enrolment> enrolmentStudentList = enrolmentService.findByEnrolmentStudentList(lectureName);
+        List<Lecture> lectureList = lectureService.findByLectureName(lectureName);
+        int lectureCapacity = lectureList.get(0).getLectureCapacity();
+        
+        System.out.println(lectureList.get(0).getLectureName());
+        System.out.println("수강정원 : " + lectureList.get(0).getLectureCapacity());
+        
+        int enrolmentStudentListSize = enrolmentStudentList.size();
+        enrolmentService.deleteStudent(lectureName, enrolmentStudentListSize, lectureCapacity);
+        return "redirect:/";
+    }
 }

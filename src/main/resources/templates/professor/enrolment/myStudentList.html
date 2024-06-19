@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="container p-5">
+		<div class="d-flex mb-3">
+			<h3><b th:text="*{lectureName}" style="font-size: 32px;">lectureName</b> 수강신청 현황</h3>
+        	<form th:action="@{/enrolments/professor/deadline}" method="post" class="ms-3">
+                <input type="hidden" name="lectureName" th:value="*{lectureName}" />
+                <button type="submit" class="btn btn-danger">마감</button>
+            </form>
+		</div>
+		<table class="table table-striped table-hover">
+	        <thead class="table-success">
+	            <tr>
+	                <th>Num</th>
+	                <th>학번</th>
+	                <th>이름</th>
+	                <th>학과</th>
+	                <th>Point</th>
+	            </tr>
+	        </thead>
+			<div th:if="${#lists.isEmpty(enrolments)}">
+		        <p>등록된 데이터가 없습니다</p>
+		    </div>
+	        <tbody th:unless="${#lists.isEmpty(enrolments)}">
+	            <tr th:unless="${#lists.isEmpty(enrolments)}" th:each="enrolment, rowStat : ${enrolments}">
+	                <td th:text="${rowStat.index + 1}">1</td>
+	                <td th:text="${enrolment.studentNumber}">201907012</td>
+	                <td th:text="${enrolment.studentName}">임성준</td>
+	                <td th:text="${enrolment.studentMajor}">Computer Science</td>
+	                <td th:text="${enrolment.studentPoint}">StudentPoint</td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+</html>

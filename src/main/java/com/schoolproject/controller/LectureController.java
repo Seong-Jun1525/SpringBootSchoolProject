@@ -53,7 +53,7 @@ public class LectureController {
     
     // 강의 목록 불러오기
     @GetMapping("/list")
-    public String listLectures(Model model) {
+    public String listLectures(Model model, HttpSession session) {
         model.addAttribute("lectures", lectureService.findAll());
         return "professor/lecture/lectureList";
     }
