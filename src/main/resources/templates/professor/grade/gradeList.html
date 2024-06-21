@@ -5,20 +5,21 @@
             <thead class="table-success">
                 <tr>
                     <th>No.</th>
-                    <th>학번</th>
-                    <th>학생 이메일</th>
+                    <th th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}">학번</th>
+                    <th th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}">학생 이메일</th>
                     <th>강의 명</th>
-                    <th>교수 이메일</th>
+                    <th th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}">교수 이메일</th>
                     <th>성  적</th>
+                    <th th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}">수  정</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="grade : ${grades}">
 					<td th:text="${grade.gradeId}"></td>
-					<td th:text="${grade.studentNumber}"></td>
-					<td th:text="${grade.studentEmail}"></td>  
+					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" th:text="${grade.studentNumber}"></td>
+					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" th:text="${grade.studentEmail}"></td>  
                     <td th:text="${grade.lectureName}"></td>
-                    <td th:text="${grade.professorEmail}"></td>
+                    <td th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" th:text="${grade.professorEmail}"></td>
                     <td th:text="${grade.score}"></td>
                     <td th:if="${session.loggedInProfessor != null}">
 						<a th:href="@{/grades/edit/{id}(id=${grade.gradeId})}" class="btn btn-primary">수정</a>

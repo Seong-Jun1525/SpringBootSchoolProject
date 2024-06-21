@@ -86,12 +86,13 @@ public class StudentController {
                 System.out.println(student + " " + student.getStudentEmail());
                 
                 String studentEmail = (String) student.getStudentEmail();
-                String studentInfo = studentService.findBystudentName(studentEmail);
+                String studentName = studentService.findBystudentName(studentEmail);
+                
                 
                 session.setAttribute("loggedInStudent", student);
-                // 로그인 성공 시 세션에 이메일 저장
+                // 로그인 성공 시 세션에 이메일 저장               
                 session.setAttribute("loggedInStudentEmail", student.getStudentEmail());
-                session.setAttribute("loggedInStudentName", student.getStudentName());
+                session.setAttribute("loggedInStudentName", studentName);
                 session.setAttribute("loggedInStudentNumber", student.getStudentNumber());
                 return "redirect:/";
             } else {
@@ -99,7 +100,7 @@ public class StudentController {
                 throw new StudentNotFoundException("이메일 또는 비밀번호가 잘못되었습니다.");
             }
         } catch (StudentNotFoundException e) {
-            throw new StudentNotFoundException("이메일 또는 비밀번호가 잘못되었습니다.2");
+            throw new StudentNotFoundException("이메일 또는 비밀번호가 잘못되었습니다.");
         }
     }
     
