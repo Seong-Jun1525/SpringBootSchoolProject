@@ -9,7 +9,7 @@
         <table class="table table-striped">
             <thead class="table-success">
                 <tr>
-                    <th>학생 이메일</th>
+                    <th>학번</th>
                     <th>강의 이름</th>
                     <th>교수 이름</th>
                     <th>학기</th>
@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <tr th:each="evaluation : ${evaluations}">
-                    <td th:text="${evaluation.studentEmail}"></td>
+                    <td th:text="${evaluation.studentNumber}"></td>
                     <td th:text="${evaluation.lectureName}"></td>
                     <td th:text="${evaluation.professorName}"></td>
                     <td th:text="${evaluation.lectureSemester}"></td>

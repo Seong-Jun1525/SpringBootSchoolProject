@@ -21,6 +21,7 @@ import com.schoolproject.entity.Lecture;
 import com.schoolproject.entity.Student;
 import com.schoolproject.exception.EnrolmentException;
 import com.schoolproject.exception.IsEmptyEnrolmentException;
+import com.schoolproject.exception.MajorNotEqualException;
 import com.schoolproject.exception.StudentNotFoundException;
 import com.schoolproject.exception.StudentPointException;
 import com.schoolproject.service.EnrolmentService;
@@ -169,19 +170,21 @@ public class EnrolmentController {
 	                selectedLecture.getLectureCredit(),
 	                selectedLecture.getLectureType()
 	        );
+        	
+        	System.out.println("studentMajor : " + studentMajor);
+        	System.out.println("lectureMajor : " + lectureMajor);
+        	System.out.println(studentMajor == lectureMajor); // 값은 같지만 참조하는 객체가 다르기때문에 비교연산자로 비교할 시 값은 false
 
-//        	if(studentMajor == lectureMajor) {
-//        		
-//        	}
-//        	else {
-//        		throw new MajorNotEqualException("당신의 전공과목이 아닙니다.");
-//        	}
-        	// 수강신청 등록
-	        enrolmentService.registerEnrolment(enrolmentMajor);
-	        // TODO 등록한 강의의 student_count 값 증가시키기
-	        lectureService.updateLectureStudentCount(lectureName);
-	        
-	        return "redirect:/";
+        	if(studentMajor.equals(lectureMajor)) {
+            	// 수강신청 등록
+    	        enrolmentService.registerEnrolment(enrolmentMajor);
+    	        // TODO 등록한 강의의 student_count 값 증가시키기
+    	        lectureService.updateLectureStudentCount(lectureName);
+    	        return "redirect:/";
+        	}
+        	else {
+        		throw new MajorNotEqualException("당신의 전공과목이 아닙니다.");
+        	}
 	    } catch(Exception e) {
 	    	throw new EnrolmentException(e.getMessage());
 	    }

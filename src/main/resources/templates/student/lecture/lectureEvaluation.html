@@ -3,8 +3,8 @@
         <h1>강의평가 작성</h1>
         <form th:action="@{/evaluations/register}" th:object="${evaluation}" method="post">
             <div class="mb-3">
-                <label for="studentEmail" class="form-label">학생 이메일</label>
-                <input type="email" id="studentEmail" name="studentEmail" class="form-control" th:value="${session.loggedInStudentEmail}" readonly>
+                <label for="studentNumber" class="form-label">학번</label>
+                <input type="number" id="studentNumber" name="studentNumber" class="form-control" th:value="${session.loggedInStudentNumber}" readonly>
             </div>
             <div class="mb-3">
                 <label for="lectureName" class="form-label">강의 이름</label>

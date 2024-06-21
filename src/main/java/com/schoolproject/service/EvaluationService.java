@@ -30,7 +30,7 @@ public class EvaluationService {
          * 교수가 강의평가 등록할 때 강의를 평가하는 컬럼 값은 입력하지 않음
          * 그래서 해당 컬럼들을 기본값으로 DB에 등록
          *  */
-		if(evaluation.getStudentEmail() == null) evaluation.setStudentEmail("");
+		if(evaluation.getStudentNumber() == null) evaluation.setStudentNumber(0);
 		if(evaluation.getEvaluationTitle() == null) evaluation.setEvaluationTitle("");
 		if(evaluation.getEvaluationContent() == null) evaluation.setEvaluationContent("");
 		if(evaluation.getLectureTotalScore() == null) evaluation.setLectureTotalScore("");
@@ -40,8 +40,9 @@ public class EvaluationService {
 		evaluationRepository.updateAutoIncrementValue();
 		return evaluationRepository.save(evaluation);
 	}
-	
-	public List<Evaluation> findByStudentEmail(String studentEmail) {
-        return evaluationRepository.findByStudentEmail(studentEmail);
-    }
+
+	public List<Evaluation> findByMyEvaluation(String lectureName) {
+		System.out.println(lectureName);
+        return evaluationRepository.findByLectureName(lectureName);
+	} 
 }

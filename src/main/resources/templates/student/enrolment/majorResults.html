@@ -27,6 +27,7 @@
                     <td th:text="${lecture.lectureType}"></td>
                     <td th:text="${lecture.lectureGrade}"></td>
                     <td th:text="${lecture.lectureMajor}"></td>
+                    <td th:text="${lecture.lectureLectureDay}"></td>
 				    <td>
 						<p th:text="${lecture.studentCount}" class="d-inline">
 							현 인원
@@ -35,7 +36,6 @@
 							수강정원
 						</p>
 					</td>
-                    <td th:text="${lecture.lectureLectureDay}"></td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/enrolments/major/register(lectureId=${lecture.lectureId}, lectureName=${lecture.lectureName}, lectureMajor=${lecture.lectureMajor})}">
 						    수강신청

@@ -16,8 +16,8 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long evaluationId;
     
-    @Column(name = "student_email", length = 100)
-    private String studentEmail;
+    @Column(name = "student_number", columnDefinition = "int default 0")
+    private Integer studentNumber;
     
     @Column(name = "lecture_name", length = 100)
     private String lectureName;
@@ -73,15 +73,15 @@ public class Evaluation {
         this.evaluationId = evaluationId;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
-    }
+    public Integer getStudentNumber() {
+		return studentNumber;
+	}
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
-    }
+	public void setStudentNumber(Integer studentNumber) {
+		this.studentNumber = studentNumber;
+	}
 
-    public String getLectureName() {
+	public String getLectureName() {
         return lectureName;
     }
 

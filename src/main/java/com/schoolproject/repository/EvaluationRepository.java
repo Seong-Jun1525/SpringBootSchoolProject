@@ -11,12 +11,14 @@ import com.schoolproject.entity.Evaluation;
 import jakarta.transaction.Transactional;
 
 public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
-	List<Evaluation> findByStudentEmail(String studentEmail);
-
 	boolean existsByEvaluationId(Long evluationId);
 	
 	@Modifying
     @Transactional
     @Query(value = "ALTER TABLE Evaluation AUTO_INCREMENT = 1", nativeQuery = true)
     void updateAutoIncrementValue();
+
+	List<Evaluation> findByStudentNumber(int studentNumber);
+	
+	List<Evaluation> findByLectureName(String lectureName);
 }
