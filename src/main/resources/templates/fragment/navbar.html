@@ -6,11 +6,13 @@
 		<ul class="navbar-nav d-flex flex-column" style="width: 100%;">
 		    <!-- 로그인된 경우 표시 -->
 		    <li th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" class="nav-item" style="color: white;">
-		      <b><a class="nav-link d-inline" th:text="${session.loggedInProfessorName}+'교수'">name</a></b>님 안녕하세요
-		    </li>
-		    <li th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" class="nav-item">
-		      <a class="nav-link" style="color: white;" th:text="${#strings.substringBefore(session.loggedInStudent.getStudentEmail(), '@')} + '님'">email</a>
-		    </li>
+  <b><a class="d-inline" th:style="'color: white; text-decoration: none;'" th:text="${session.loggedInProfessorName} + ' 교수'">name</a></b>님 안녕하세요
+</li>
+<li th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" class="nav-item" style="color: white;">
+  <b><a class="d-inline" th:style="'color: white; text-decoration: none;'" th:text="${session.loggedInStudentName} + ' 학생'">name</a></b>님 안녕하세요
+</li>
+
+		    
 		    <li th:if="${session.loggedInProfessor != null or session.loggedInStudent != null}" class="nav-item">
 		      <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
 		    </li>
