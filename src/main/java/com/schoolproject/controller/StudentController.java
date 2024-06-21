@@ -91,6 +91,8 @@ public class StudentController {
                 session.setAttribute("loggedInStudent", student);
                 // 로그인 성공 시 세션에 이메일 저장
                 session.setAttribute("loggedInStudentEmail", student.getStudentEmail());
+                session.setAttribute("loggedInStudentName", student.getStudentName());
+                session.setAttribute("loggedInStudentNumber", student.getStudentNumber());
                 return "redirect:/";
             } else {
                 // 이 부분은 도달하지 않음, 예외가 발생할 것이기 때문

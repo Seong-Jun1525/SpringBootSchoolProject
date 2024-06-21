@@ -5,8 +5,14 @@
 			<form id="searchForm" th:action="@{/enrolments/search}" th:object="${lecture}" method="post">
 				<div class="d-flex justify-content-between">
 					<div>
-						<label for="lectureRegistrationDate" class="form-label">년도</label>
-						<input type="text" class="form-control" id="lectureRegistrationDate" th:field="*{lectureRegistrationDate}" placeholder="2024" />
+						<label for="currentYear" class="form-label">년도</label>
+						<input
+							type="text"
+							class="form-control"
+							id="currentYear"
+							th:value="${currentYear}"
+							readonly
+						/>
 					</div>
 					<div>
 						<label for="lectureSemester" class="form-label">학기</label>

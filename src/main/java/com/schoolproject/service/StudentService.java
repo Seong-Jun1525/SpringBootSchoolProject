@@ -57,6 +57,7 @@ public class StudentService {
         if (student.getStudentRegistrationDate() == null) {
             student.setStudentRegistrationDate(LocalDate.now());
         }
+        studentRepository.updateAutoIncrementValue();
         return studentRepository.save(student);
     }
 
@@ -134,5 +135,6 @@ public class StudentService {
         Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
     	return studentOptional;
     }
+
     
 }

@@ -20,10 +20,11 @@ public class EnrolmentService {
 	
 	public Enrolment registerEnrolment(Enrolment enrolment) {
 		// 만약 수강신청을 했을 경우
-		if (enrolmentOneRepository.existsByLectureNameAndStudentNumber(
+		if(enrolmentOneRepository.existsByLectureNameAndStudentNumber(
 				enrolment.getLectureName(), enrolment.getStudentNumber())) {
             throw new AlreadyExistsMajorEnrolmentException("이미 수강신청하신 과목입니다.");
         }
+		enrolmentOneRepository.updateAutoIncrementValue();
         return enrolmentOneRepository.save(enrolment);
 	}
 
@@ -44,8 +45,8 @@ public class EnrolmentService {
             int deleteCount = enrolmentStudentListSize - lectureCapacity;
             List<Enrolment> enrolmentsToDelete = enrolmentOneRepository.findByLectureNameOrderByStudentPointDesc(lectureName);
 
-            System.out.println(deleteCount); 
-            System.out.println(lectureCapacity); 
+            System.out.println(deleteCount);
+            System.out.println(lectureCapacity);
             System.out.println(enrolmentStudentListSize);
             
             // studentPoint를 기준으로 내림차순으로 정렬한 후, deleteCount만큼 삭제

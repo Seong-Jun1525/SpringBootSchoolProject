@@ -1,4 +1,4 @@
-<html th:fragment="majorResultsFragment" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="secondResultsFragment" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${#lists.isEmpty(lectures)}">
         <p>등록된 데이터가 없습니다</p>
     </div>
@@ -20,13 +20,14 @@
             </thead>
             <tbody>
                 <tr th:each="lecture, rowStat : ${lectures}">
-                    <td th:text="${rowStat.index + 1}"></td>
-                    <td th:text="${lecture.lectureName}"></td>
-                    <td th:text="${lecture.professorName}"></td>
-                    <td th:text="${lecture.lectureCredit}"></td>
-                    <td th:text="${lecture.lectureType}"></td>
-                    <td th:text="${lecture.lectureGrade}"></td>
-                    <td th:text="${lecture.lectureMajor}"></td>
+				    <td th:text="${rowStat.index + 1}"></td>
+				    <td th:text="${lecture.lectureName}"></td>
+				    <td th:text="${lecture.professorName}"></td>
+				    <td th:text="${lecture.lectureCredit}"></td>
+				    <td th:text="${lecture.lectureType}"></td>
+				    <td th:text="${lecture.lectureGrade}"></td>
+				    <td th:text="${lecture.lectureMajor}"></td>
+				    <td th:text="${lecture.lectureLectureDay}"></td>
 				    <td>
 						<p th:text="${lecture.studentCount}" class="d-inline">
 							현 인원
@@ -35,13 +36,15 @@
 							수강정원
 						</p>
 					</td>
-                    <td th:text="${lecture.lectureLectureDay}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{/enrolments/major/register(lectureId=${lecture.lectureId}, lectureName=${lecture.lectureName}, lectureMajor=${lecture.lectureMajor})}">
+                        <a
+	                        class="btn btn-primary"
+	                        th:href="@{/enrolments/secondEnrolment/register(lectureId=${lecture.lectureId}, lectureName=${lecture.lectureName})}"
+                        >
 						    수강신청
 						</a>
                     </td>
-                </tr>
+				</tr>
             </tbody>
         </table>
     </div>

@@ -37,6 +37,7 @@ public class EvaluationService {
 		if(evaluation.getLectureScore() == null) evaluation.setLectureScore("");
 		
 		evaluation.setLectureRegistrationDate(LocalDate.now()); // 등록날짜는 현재날짜
+		evaluationRepository.updateAutoIncrementValue();
 		return evaluationRepository.save(evaluation);
 	}
 	

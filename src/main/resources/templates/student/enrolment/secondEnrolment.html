@@ -1,5 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<div class="container p-5">
 		<!-- 추가수강신청 -->
+		<div class="mb-3">
+			<h3>추가수강신청(교양)</h3>
+			<form th:action="@{/enrolments/secondEnrolment/search}" th:object="${lecture}" class="mt-5" id="searchForm" method="post">
+				<div class="d-flex">
+					<div>
+						<input type="text" class="form-control" id="studentMajor" th:field="*{lectureMajor}" placeholder="전공학과" />
+					</div>
+					<div class="ms-3">
+						<input type="number" class="form-control" id="studentGrade" th:field="*{lectureGrade}" placeholder="학년" />
+					</div>
+					<div class="ms-3">
+						<input type="hidden" class="form-control" id="lectureType" name="lectureType" value="교양" />
+					</div>
+					<button class="ms-3 btn btn-primary" href="#" th:data-url="@{/enrolments/secondEnrolment/search}" onclick="loadSearchContent(event)">검색</button>
+				</div>
+			</form>
+		</div>
+		<main id="search-content" class="w-100" layout:fragment="content">
+			<div th:include="student/enrolment/secondResults :: secondResultsFragment"></div>
+	    </main>
 	</div>
 </html>

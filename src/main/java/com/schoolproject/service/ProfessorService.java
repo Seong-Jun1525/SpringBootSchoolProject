@@ -21,6 +21,7 @@ public class ProfessorService {
 	// 교수 등록
 	public Professor registerProfessor(Professor professor) {
 		professor.setProfessorRegistrationDate(LocalDate.now()); // 가입날짜는 현재날짜
+		professorRepository.updateAutoIncrementValue();
 		return professorRepository.save(professor);
 	}
 	
