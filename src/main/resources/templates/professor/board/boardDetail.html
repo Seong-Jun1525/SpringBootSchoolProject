@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board Details</title>
+</head>
+<body>
+    <h1 th:text="${board.title}">Board Title</h1>
+    <p th:text="${board.contents}">Board Contents</p>
+    <p th:text="${board.professorEmail}">Professor Email</p>
+    <p th:text="${board.boardRegistrationDate}">Board Registration Date</p>
+    <a href="/boards">Back to Boards</a>
+</body>
+</html>
