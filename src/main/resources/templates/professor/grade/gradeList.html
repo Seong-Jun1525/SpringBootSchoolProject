@@ -16,13 +16,26 @@
             <tbody>
                 <tr th:each="grade : ${grades}">
 					<td th:text="${grade.gradeId}"></td>
-					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" th:text="${grade.studentNumber}"></td>
-					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" th:text="${grade.studentEmail}"></td>  
+					
+					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" 
+					th:text="${grade.studentNumber}"></td>
+					
+					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" 
+					th:text="${grade.studentEmail}"></td>  
+					
                     <td th:text="${grade.lectureName}"></td>
-                    <td th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" th:text="${grade.professorEmail}"></td>
+                    
+                    <td th:if="${session.loggedInStudent != null and session.loggedInProfessor == null}" 
+                    th:text="${grade.professorEmail}"></td>
+                    
                     <td th:text="${grade.score}"></td>
+                    
                     <td th:if="${session.loggedInProfessor != null}">
-						<a th:href="@{/grades/edit/{id}(id=${grade.gradeId})}" class="btn btn-primary">수정</a>
+						<a th:data-url="@{/grades/edit/{id}(id=${grade.gradeId})}" 
+						onclick="loadContent(event)" 
+						class="btn btn-primary">
+						수정
+						</a>
 					</td>
                 </tr>
             </tbody>

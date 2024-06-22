@@ -19,10 +19,20 @@
                     <td th:text="${board.professorEmail}"></td>
                     <td th:text="${board.boardRegistrationDate}"></td>
                     <td>
-						<a th:href="@{/boards/edit/{id}(id=${board.boardId})}" class="btn btn-primary">수정</a>
+						<a 
+						th:data-url="@{/boards/edit/{id}(id=${board.boardId})}" 
+						onclick="loadContent(event)"
+						class="btn btn-primary">
+						수정
+						</a>
 					</td>
 					<td>
-						<a th:href="@{/boards/edit/{id}(id=${board.boardId})}" class="btn btn-primary">삭제</a>
+						<a 
+						th:data-url="@{/boards/edit/{id}(id=${board.boardId})}" 
+						onclick="loadContent(event)"
+						class="btn btn-primary">
+						삭제
+						</a>
 					</td>
                 </tr>
             </tbody>

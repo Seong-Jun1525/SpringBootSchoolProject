@@ -16,7 +16,7 @@ public class Board {
 	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long BoardId;
+	 private Long boardId;
 	 
 	 @Column(name = "title", nullable = false, columnDefinition = "varchar(255) default ''")
 	 private String title;
@@ -30,12 +30,14 @@ public class Board {
 	 @Column(name = "borde_registration_date", nullable = false)
 	 private LocalDate boardRegistrationDate;
 
+	
+
 	public Long getBoardId() {
-		return BoardId;
+		return boardId;
 	}
 
 	public void setBoardId(Long boardId) {
-		BoardId = boardId;
+		this.boardId = boardId;
 	}
 
 	public String getTitle() {
