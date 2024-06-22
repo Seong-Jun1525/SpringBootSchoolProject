@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.schoolproject.entity.Enrolment;
 import com.schoolproject.entity.Lecture;
@@ -33,6 +35,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/enrolments")
 public class EnrolmentController {
+	// Service 등록
 	@Autowired
 	LectureService lectureService;
 	@Autowired
@@ -40,7 +43,7 @@ public class EnrolmentController {
 	@Autowired
 	EnrolmentService enrolmentService;
 
-	// 개설강좌
+	// 개설강좌 목록
 	@GetMapping("/lectureList")
     public String showEnrolmentPage(Model model) {
 		int currentYear = Year.now().getValue();
@@ -49,6 +52,7 @@ public class EnrolmentController {
         return "student/enrolment/lectureList";
     }
 	
+	// 강의검색 기능
 	@PostMapping("/search")
 	public String searchLectures(
 			@ModelAttribute Lecture lecture,
@@ -58,12 +62,14 @@ public class EnrolmentController {
 	    return "student/enrolment/lectureResults :: lectureResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
 	}
 	
+	// 수강신청 현황
 	@GetMapping("/enrolmentList")
 	public String showMyEnrolmentPage(Model model) {
 		model.addAttribute("enrolment", new Enrolment());
 		return "student/enrolment/enrolmentList";
 	}
 	
+	// 수강신청현황 검색기능
 	@PostMapping("/enrolmentList/search")
 	public String searchEnrolments(
 			@ModelAttribute Enrolment enrolment,
@@ -81,6 +87,14 @@ public class EnrolmentController {
 	    model.addAttribute("enrolments", enrolments);
 	    return "student/enrolment/enrolmentResults :: enrolmentResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
 	}
+	
+	// 수강신청 취소
+	@PostMapping("/delete/{id}")
+    public String deleteEnrolment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        enrolmentService.deleteEnrolment(id);
+        redirectAttributes.addFlashAttribute("message", "수강신청이 취소되었습니다.");
+        return "redirect:/";
+    }
 	
 	// 전공
 	@GetMapping("/majorsEnrolment")

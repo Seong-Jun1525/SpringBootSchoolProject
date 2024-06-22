@@ -1,2 +1,4 @@
-# SpringBootProject
-## 유한대학교
+# 유한대학교 SpringBoot 기말Project
+## 소개
+### 주제
+저희 프로젝트의 주제는 학교포털 웹사이트입니다.

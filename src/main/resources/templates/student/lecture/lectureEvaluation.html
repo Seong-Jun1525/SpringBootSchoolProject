@@ -12,6 +12,13 @@
                 <input type="text" id="lectureName" name="lectureName" class="form-control" th:value="${lectureName}" readonly>
             </div>
             <div class="mb-3">
+                <label for="lectureType" class="form-label">강의분류</label>
+                <select id="lectureType" name="lectureType" class="form-control" th:field="*{lectureType}">
+                    <option value="전공">전공</option>
+                    <option value="교양">교양</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="evaluationTitle" class="form-label">평가 제목</label>
                 <input type="text" id="evaluationTitle" name="evaluationTitle" class="form-control" th:field="*{evaluationTitle}">
             </div>

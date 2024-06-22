@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.schoolproject.entity.Professor;
 import com.schoolproject.entity.Student;
 import com.schoolproject.exception.AlreadyExistsStudentException;
 import com.schoolproject.exception.StudentNotFoundException;

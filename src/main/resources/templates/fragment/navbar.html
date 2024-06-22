@@ -15,6 +15,7 @@
 		      <a class="btn btn-danger" th:href="@{/professors/logout}">로그아웃</a>
 		    </li>
 		    <!-- //로그인된 경우 표시 -->
+		    
 		    <!-- 로그인이 되지 않은 경우 표시 -->
 		    <li th:if="${session.loggedInProfessor == null and session.loggedInStudent == null}" class="nav-item dropdown">
 		    	<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,10 +28,6 @@
 		    </li>
 		    <!-- //로그인이 되지 않은 경우 표시 -->
 		</ul>
-		<form class="d-flex" role="search" style="margin-bottom: 10px;">
-			<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-primary" type="submit">Search</button>
-		</form>
 		<div class="collapse navbar-collapse d-flex flex-column" id="navbarSupportedContent">
 			<ul class="nav nav-pills d-flex flex-column me-auto mb-2 mb-lg-0">
 				<!-- 교수로 로그인 했을 때 메뉴 -->
@@ -50,9 +47,6 @@
 						</li>
 						<li>
 						  	<a class="dropdown-item" href="#" th:data-url="@{/grades/input}" onclick="loadContent(event)">성적등록</a>
-						</li>
-						<li>
-						  	<a class="dropdown-item" href="#" th:data-url="@{/evaluations/professor/register}" onclick="loadContent(event)">강의평가등록</a>
 						</li>
 				    </ul>
 				</li>
@@ -127,6 +121,5 @@
 				<!-- //로그인을 하지 않았을 경우의 메뉴 -->
 			</ul>
 		</div>
-		
 	</div>
 </nav>

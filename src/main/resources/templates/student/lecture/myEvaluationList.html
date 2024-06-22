@@ -11,7 +11,6 @@
             <thead class="table-success">
                 <tr>
                     <th>강의명</th>
-                    <th>교수명</th>
                     <th>강의분류</th>
                     <th>평가제목</th>
                     <th>총점</th>
@@ -21,7 +20,6 @@
             <tbody>
                 <tr th:each="evaluation : ${evaluations}">
                     <td th:text="${evaluation.lectureName}"></td>
-                    <td th:text="${evaluation.professorName}"></td>
                     <td th:text="${evaluation.lectureType}"></td>
                     <td th:text="${evaluation.evaluationTitle}"></td>
                     <td th:text="${evaluation.lectureTotalScore}"></td>

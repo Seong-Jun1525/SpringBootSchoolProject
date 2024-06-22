@@ -58,4 +58,10 @@ public class EnrolmentService {
             }
         }
 	}
+	
+	// 수강신청취소
+	public void deleteEnrolment(Long id) {
+		enrolmentOneRepository.deleteById(id);
+		enrolmentOneRepository.updateAutoIncrementValue();
+    }
 }

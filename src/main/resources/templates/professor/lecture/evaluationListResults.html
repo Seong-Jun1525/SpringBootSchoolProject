@@ -2,51 +2,53 @@
     <div th:if="${#lists.isEmpty(evaluations)}">
         <p>등록된 데이터가 없습니다</p>
     </div>
-	<div th:unless="${#lists.isEmpty(evaluations)}">
-		<table class="table table-striped">
-			<thead>
-				<tr class="table-success">
-					<th>NUM</th>
-					<th>강의명</th>
-					<th>학번</th>
-					<th>상세정보</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="evaluation, rowStat : ${evaluations}">
-					<td th:text="${rowStat.index + 1}"></td>
-					<td th:text="${evaluation.lectureName}"></td>
-					<td th:text="${evaluation.studentNumber}"></td>
-					<td>
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-						  	정보보기
-						</button>
-						<!-- Modal 내용 -->
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  	<div class="modal-dialog">
-						    	<div class="modal-content">
-						      		<div class="modal-header">
-										<h1 class="modal-title fs-5" id="exampleModalLabel" th:text="${evaluation.evaluationTitle}">Modal title</h1>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						      		</div>
-							      	<div class="modal-body">
-										<h4>강의 한줄 평</h4>
-						        		<p th:text="${evaluation.evaluationContent}"></p>
-							        	<hr>
-							        	<p th:text="'강의점수 : ' + ${evaluation.lectureScore}"></p>
-							        	<hr>
-							        	<p th:text="'총점 : ' + ${evaluation.lectureTotalScore}"></p>
-							      	</div>
-							      	<div class="modal-footer">
-						        		<p th:text="${evaluation.evaluationRegistrationDate}"></p>
-							      	</div>
-						    	</div>
-						  	</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    <div th:unless="${#lists.isEmpty(evaluations)}">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-success">
+                    <th>NUM</th>
+                    <th>강의명</th>
+                    <th>학번</th>
+                    <th>상세정보</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="evaluation, rowStat : ${evaluations}">
+                    <td th:text="${rowStat.index + 1}"></td>
+                    <td th:text="${evaluation.lectureName}"></td>
+                    <td th:text="${evaluation.studentNumber}"></td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" 
+                                th:attr="data-bs-target='#modal' + ${rowStat.index}" 
+                                data-bs-toggle="modal">
+                            정보보기
+                        </button>
+                        <!-- Modal 내용 -->
+                        <div class="modal fade" th:id="'modal' + ${rowStat.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel" th:text="${evaluation.evaluationTitle}">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>강의 한줄 평</h4>
+                                        <p th:text="${evaluation.evaluationContent}"></p>
+                                        <hr>
+                                        <p th:text="'강의점수 : ' + ${evaluation.lectureScore}"></p>
+                                        <hr>
+                                        <p th:text="'총점 : ' + ${evaluation.lectureTotalScore}"></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <p th:text="${evaluation.evaluationRegistrationDate}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </html>

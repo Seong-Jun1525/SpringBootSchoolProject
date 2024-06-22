@@ -1,7 +1,6 @@
 package com.schoolproject.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,10 +20,5 @@ public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
 
 	List<Evaluation> findByStudentNumber(int studentNumber);
 	
-	Optional<Evaluation> findByLectureName(String lectureName);
-
-	List<Evaluation> findByProfessorNameAndProfessorDept(String professorName, String professorDept);
-
-	List<Evaluation> findByLectureNameAndProfessorNameAndProfessorDeptAndLectureSemester(String lectureName,
-			String professorName, String professorDept, String lectureSemester);
+	List<Evaluation> findByLectureName(String lectureName);
 }

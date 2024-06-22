@@ -12,79 +12,47 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "evaluation")
 public class Evaluation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "evaluation_id")
     private Long evaluationId;
-    
-    @Column(name = "student_number", columnDefinition = "int default 0")
-    private Integer studentNumber;
-    
+
     @Column(name = "lecture_name", length = 100)
     private String lectureName;
-    
-    @Column(name = "professor_name", length = 30)
-    private String professorName;
-    
-    @Column(name = "lecture_semester", length = 20)
-    private String lectureSemester;
 
-    @Column(name = "lecture_grade", columnDefinition = "int DEFAULT 1")
-    private int lectureGrade;
-    
     @Column(name = "lecture_type", length = 10)
     private String lectureType;
-    
+
     @Column(name = "evaluation_title", length = 50)
     private String evaluationTitle;
-    
+
     @Column(name = "evaluation_content", length = 2048)
     private String evaluationContent;
-    
+
     @Column(name = "lecture_totalscore", length = 5)
     private String lectureTotalScore;
-    
-    @Column(name = "lecture_creditscore", length = 5)
-    private String lectureCreditScore;
-    
+
     @Column(name = "lecture_score", length = 5)
     private String lectureScore;
-    
-    @Column(name = "lecture_likecount")
-    private int lectureLikeCount;
-    
+
+    @Column(name = "student_number")
+    private int studentNumber = 0;
+
     @Column(name = "evaluation_registration_date")
     private LocalDate evaluationRegistrationDate;
-    
-    @Column(name = "professor_dept")
-    private String professorDept;
-    
+
     // Getters and Setters
 
     public Long getEvaluationId() {
         return evaluationId;
     }
 
-    public LocalDate getEvaluationRegistrationDate() {
-		return evaluationRegistrationDate;
-	}
-
-	public void setEvaluationRegistrationDate(LocalDate evaluationRegistrationDate) {
-		this.evaluationRegistrationDate = evaluationRegistrationDate;
-	}
-
-	public void setEvaluationId(Long evaluationId) {
+    public void setEvaluationId(Long evaluationId) {
         this.evaluationId = evaluationId;
     }
 
-    public Integer getStudentNumber() {
-		return studentNumber;
-	}
-
-	public void setStudentNumber(Integer studentNumber) {
-		this.studentNumber = studentNumber;
-	}
-
-	public String getLectureName() {
+    public String getLectureName() {
         return lectureName;
     }
 
@@ -92,31 +60,7 @@ public class Evaluation {
         this.lectureName = lectureName;
     }
 
-    public String getProfessorName() {
-        return professorName;
-    }
-
-    public void setProfessorName(String professorName) {
-        this.professorName = professorName;
-    }
-
-    public String getLectureSemester() {
-        return lectureSemester;
-    }
-
-    public void setLectureSemester(String lectureSemester) {
-        this.lectureSemester = lectureSemester;
-    }
-
-    public int getLectureGrade() {
-		return lectureGrade;
-	}
-
-	public void setLectureGrade(int lectureGrade) {
-		this.lectureGrade = lectureGrade;
-	}
-
-	public String getLectureType() {
+    public String getLectureType() {
         return lectureType;
     }
 
@@ -148,14 +92,6 @@ public class Evaluation {
         this.lectureTotalScore = lectureTotalScore;
     }
 
-    public String getLectureCreditScore() {
-        return lectureCreditScore;
-    }
-
-    public void setLectureCreditScore(String lectureCreditScore) {
-        this.lectureCreditScore = lectureCreditScore;
-    }
-
     public String getLectureScore() {
         return lectureScore;
     }
@@ -164,19 +100,19 @@ public class Evaluation {
         this.lectureScore = lectureScore;
     }
 
-    public int getLectureLikeCount() {
-        return lectureLikeCount;
+    public int getStudentNumber() {
+        return studentNumber;
     }
 
-    public void setLectureLikeCount(int lectureLikeCount) {
-        this.lectureLikeCount = lectureLikeCount;
+    public void setStudentNumber(int studentNumber) {
+        this.studentNumber = studentNumber;
     }
 
-	public String getProfessorDept() {
-		return professorDept;
-	}
+    public LocalDate getEvaluationRegistrationDate() {
+        return evaluationRegistrationDate;
+    }
 
-	public void setProfessorDept(String professorDept) {
-		this.professorDept = professorDept;
-	}
+    public void setEvaluationRegistrationDate(LocalDate evaluationRegistrationDate) {
+        this.evaluationRegistrationDate = evaluationRegistrationDate;
+    }
 }

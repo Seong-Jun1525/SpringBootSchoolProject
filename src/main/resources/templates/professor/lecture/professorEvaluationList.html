@@ -9,18 +9,13 @@
 					<label for="lectureName" class="form-label">강의명</label>
 					<input type="text" class="form-control" id="lectureName" th:field="*{lectureName}" placeholder="강의명" required />
 				</div>
-				<div>
-					<label for="prfessorName" class="form-label">교수명</label>
-					<input type="text" class="form-control" id="prfessorName" name="prfessorName" th:value="${session.professorName}" readonly />
-				</div>
-				<div>
-					<label for="prfessorDept" class="form-label">학과</label>
-					<input type="text" class="form-control" id="prfessorDept" name="prfessorDept" th:value="${session.professorDept}" readonly />
-				</div>
-				<div>
-					<label for="lectureSemester" class="form-label">학기</label>
-					<input type="text" class="form-control" id="lectureSemester" th:field="*{lectureSemester}" placeholder="1학기" required />
-				</div>
+	            <div class="mb-3">
+	                <label for="lectureType" class="form-label">강의분류</label>
+	                <select id="lectureType" name="lectureType" class="form-control" th:field="*{lectureType}">
+	                    <option value="전공">전공</option>
+	                    <option value="교양">교양</option>
+	                </select>
+	            </div>
 			</div>
 			<button class="float-end mt-3 btn btn-primary" href="#" th:data-url="@{/evaluations/professor/search}" onclick="loadSearchContent(event)">검색</button>
 		</form>

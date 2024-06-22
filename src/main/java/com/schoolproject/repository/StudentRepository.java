@@ -20,8 +20,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student findByStudentNumber(int studentNumber);
     
-    Student save(Student student);
-    
     @Modifying
     @Transactional
     @Query(value = "ALTER TABLE Student AUTO_INCREMENT = 1", nativeQuery = true)
