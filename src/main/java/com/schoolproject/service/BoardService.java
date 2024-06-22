@@ -32,5 +32,23 @@ public class BoardService {
     public Board save(Board board) {
         return boardRepository.save(board);
     }
+    
+    public Board getBoardById(Long boardId) {
+        return boardRepository.findById(boardId).orElseThrow();
+    }
 
+    @Transactional
+    public void updateBoard(Board updateBoard) {
+        // 기존 데이터 가져오기
+        Board existingBoard = getBoardById(updateBoard.getBoardId());
+        // 업데이트할 필드들 설정
+        existingBoard.setTitle(updateBoard.getTitle());
+        existingBoard.setContents(updateBoard.getContents());
+        existingBoard.setProfessorEmail(updateBoard.getProfessorEmail());
+        existingBoard.setBoardRegistrationDate(LocalDate.now());
+
+        // 업데이트된 성적 정보를 저장
+        boardRepository.save(existingBoard);
+    }
+    
 }

@@ -15,7 +15,10 @@
                 <tr th:each="board : ${boards}">
                     <td th:text="${board.boardId}"></td>
                     <td>
-						<a th:href="@{/boards/edit/{id}(id=${board.boardId})}" class="btn btn-primary">상 세</a>
+						<a th:href="@{/boards/edit/{id}(id=${board.boardId})}" 
+						class="btn btn-primary">
+						상 세
+						</a>
 					</td>
                     <td th:text="${board.title}"></td>
                     <td th:text="${board.professorEmail}"></td>
