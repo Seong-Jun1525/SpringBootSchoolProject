@@ -73,6 +73,9 @@
 						<li>
 							<a class="dropdown-item" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>
 						</li>
+						<li>
+ 							<a class="dropdown-item" href="#" th:data-url="@{/evaluations/professor/evaluationList}" onclick="loadContent(event)">평가목록</a>
+						</li>
 				    </ul>
 				</li>
 				<!-- //교수로 로그인 했을 때 메뉴 -->
@@ -100,13 +103,11 @@
 						</li>
 				    </ul>
 				</li>
-				<!-- 강의 평가 메뉴 -> 평가 목록 끝에 버튼으로 이동
 				<li th:if="${session.loggedInStudent != null}" class="nav-item">
-				  <a class="nav-link" href="#" th:data-url="@{/evaluations/register}" onclick="loadContent(event)">강의평가</a>
+				  <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">강의평가</a>
 				</li>
-				-->
 				<li th:if="${session.loggedInStudent != null}" class="nav-item">
-				  <a class="nav-link" href="#" th:data-url="@{/evaluations/list}" onclick="loadContent(event)">평가목록</a>
+				  <a class="nav-link" href="#" th:data-url="@{/evaluations/evaluationList}" onclick="loadContent(event)">평가목록</a>
 				</li>
 				<li th:if="${session.loggedInStudent != null}" class="nav-item">
 					<a class="nav-link" href="#" th:data-url="@{/grades/list}" onclick="loadContent(event)">성적목록</a>

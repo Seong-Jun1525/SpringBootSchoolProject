@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container p-5">
+	<div class="mb-3">
+		<h1>강의평가 목록</h1>
+	    <form id="searchForm" th:action="@{/evaluations/professor/search}" th:object="${evaluation}" method="post">
+			<div class="d-flex justify-content-between">
+				<div>
+					<label for="lectureName" class="form-label">강의명</label>
+					<input type="text" class="form-control" id="lectureName" th:field="*{lectureName}" placeholder="강의명" required />
+				</div>
+				<div>
+					<label for="prfessorName" class="form-label">교수명</label>
+					<input type="text" class="form-control" id="prfessorName" name="prfessorName" th:value="${session.professorName}" readonly />
+				</div>
+				<div>
+					<label for="prfessorDept" class="form-label">학과</label>
+					<input type="text" class="form-control" id="prfessorDept" name="prfessorDept" th:value="${session.professorDept}" readonly />
+				</div>
+				<div>
+					<label for="lectureSemester" class="form-label">학기</label>
+					<input type="text" class="form-control" id="lectureSemester" th:field="*{lectureSemester}" placeholder="1학기" required />
+				</div>
+			</div>
+			<button class="float-end mt-3 btn btn-primary" href="#" th:data-url="@{/evaluations/professor/search}" onclick="loadSearchContent(event)">검색</button>
+		</form>
+	</div>
+	<!--
+    <div th:if="${#lists.isEmpty(professorEvaluations)}">
+        <p>등록된 데이터가 없습니다</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(professorEvaluations)}">
+        <table class="table table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>강의명</th>
+                    <th>평가현황</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="professorEvaluation : ${professorEvaluations}">
+                    <td th:text="${professorEvaluation.lectureName}"></td>
+                    <td>
+						<a
+							class="btn btn-primary"
+							href="#"
+							th:data-url="@{/evaluations/professor/lectureEvaluationList(
+									lectureName=${professorEvaluation.lectureName},
+									evaluationTitle=${professorEvaluation.evaluationTitle},
+									evaluationContent=${professorEvaluation.evaluationContent},
+									lectureTotalScore=${professorEvaluation.lectureTotalScore},
+									lectureScore=${professorEvaluation.lectureScore},
+									studentNumber=${professorEvaluation.studentNumber}
+								)}"
+							onclick="loadContent(event)"
+						>
+							현황보기
+						</a>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    -->
+    <main id="search-content" class="w-100" layout:fragment="content">
+        <!-- 삽입될 내용 -->
+		<div th:include="professor/lecture/evaluationListResults :: evaluationListResultsFragment"></div>
+    </main>
+</div>
+</html>

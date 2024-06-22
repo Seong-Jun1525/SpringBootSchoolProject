@@ -77,7 +77,6 @@ public class ProfessorController {
         		
         		String professorEmail = (String) professor.getProfessorEmail();
         		String professorName = professorService.findByProfessorName(professorEmail);
-        		
         		System.out.println("이름 : " + professorName);
         		
                 session.setAttribute("loggedInProfessor", professor);

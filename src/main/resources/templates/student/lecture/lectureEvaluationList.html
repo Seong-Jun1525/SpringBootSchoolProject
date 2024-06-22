@@ -2,42 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="container p-5">
     <h1>강의평가 목록</h1>
-    <div th:if="${#lists.isEmpty(evaluations)}">
+    <p th:text="'학번 ' + ${studentNumber}"></p>
+    <div th:if="${#lists.isEmpty(lectureList)}">
         <p>등록된 데이터가 없습니다</p>
     </div>
-    <div th:unless="${#lists.isEmpty(evaluations)}">
+    <div th:unless="${#lists.isEmpty(lectureList)}">
         <table class="table table-striped">
             <thead class="table-success">
                 <tr>
-                    <th>학번</th>
                     <th>강의 이름</th>
-                    <th>교수 이름</th>
-                    <th>학기</th>
-                    <th>수강 학년</th>
-                    <th>강의 유형</th>
-                    <th>평가 제목</th>
-                    <th>평가 내용</th>
-                    <th>총 점수</th>
-                    <th>학점 점수</th>
-                    <th>강의 점수</th>
                     <th>평가하기</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="evaluation : ${evaluations}">
-                    <td th:text="${evaluation.studentNumber}"></td>
-                    <td th:text="${evaluation.lectureName}"></td>
-                    <td th:text="${evaluation.professorName}"></td>
-                    <td th:text="${evaluation.lectureSemester}"></td>
-                    <td th:text="${evaluation.lectureGrade}"></td>
-                    <td th:text="${evaluation.lectureType}"></td>
-                    <td th:text="${evaluation.evaluationTitle}"></td>
-                    <td th:text="${evaluation.evaluationContent}"></td>
-                    <td th:text="${evaluation.lectureTotalScore}"></td>
-                    <td th:text="${evaluation.lectureCreditScore}"></td>
-                    <td th:text="${evaluation.lectureScore}"></td>
+                <tr th:each="item : ${lectureList}">
+                    <td th:text="${item}"></td>
                     <td>
-						<a class="btn btn-primary" href="#" th:data-url="@{/evaluations/register}" onclick="loadContent(event)">강의평가</a>
+						<a class="btn btn-primary" href="#" th:data-url="@{/evaluations/register(item=${item})}" onclick="loadContent(event)">강의평가</a>
 					</td>
                 </tr>
             </tbody>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container p-5">
+    <h1>강의평가 목록</h1>
+    <p th:text="'학번 ' + ${studentNumber}"></p>
+    <div th:if="${#lists.isEmpty(evaluations)}">
+        <p>등록된 데이터가 없습니다</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(evaluations)}">
+        <table class="table table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>강의명</th>
+                    <th>교수명</th>
+                    <th>강의분류</th>
+                    <th>평가제목</th>
+                    <th>총점</th>
+                    <th>강의점수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="evaluation : ${evaluations}">
+                    <td th:text="${evaluation.lectureName}"></td>
+                    <td th:text="${evaluation.professorName}"></td>
+                    <td th:text="${evaluation.lectureType}"></td>
+                    <td th:text="${evaluation.evaluationTitle}"></td>
+                    <td th:text="${evaluation.lectureTotalScore}"></td>
+                    <td th:text="${evaluation.lectureScore}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

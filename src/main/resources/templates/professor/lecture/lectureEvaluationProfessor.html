@@ -1,7 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<div class="container p-5">
+		<!-- 교수 강의평가 등록 -->
         <h1>강의평가 작성</h1>
-        <form th:action="@{/evaluations/register}" th:object="${evaluation}" method="post">
+        <form th:action="@{/evaluations/professor/register}" th:object="${evaluation}" method="post">
             <div class="mb-3">
                 <label for="lectureName" class="form-label">강의명</label>
                 <input type="text" id="lectureName" name="lectureName" class="form-control" th:field="*{lectureName}">
@@ -11,14 +12,18 @@
                 <input type="text" id="professorName" name="professorName" class="form-control" th:value="${loggedInProfessorName}" readonly>
             </div>
             <div class="mb-3">
+                <label for="professorDept" class="form-label">담당학과</label>
+                <input type="text" id="professorDept" name="professorDept" class="form-control" th:value="${loggedInProfessorDept}" readonly>
+            </div>
+            <div class="mb-3">
                 <label for="lectureGrade" class="form-label">수강 학년</label>
                 <input type="number" id="lectureGrade" name="lectureGrade" class="form-control" th:value="${lectureGrade}">
             </div>
             <div class="mb-3">
                 <label for="lectureSemester" class="form-label">학기</label>
                 <select id="lectureSemester" name="lectureSemester" class="form-control" th:field="*{lectureSemester}">
-                    <option value="1">1학기</option>
-                    <option value="2">2학기</option>
+                    <option value="1학기">1학기</option>
+                    <option value="2학기">2학기</option>
                 </select>
             </div>
             <div class="mb-3">
