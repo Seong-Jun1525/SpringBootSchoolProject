@@ -9,5 +9,5 @@ import com.schoolproject.entity.Board;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 	
 	List<Board> findByProfessorEmail(String ProfessorEmail);
-
+	List<Board> findByBoardId(Long BoardId);
 }

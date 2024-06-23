@@ -1,31 +1,143 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="defaultContentFragment">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <!-- 필요한 CSS 파일들 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
 <div class="container p-5">
-        <h2 style="text-align: center; font-weight: bold;">공지사항</h2>
-        <table class="table table-striped">
+		<h2 style="text-align: center;">게시글 목록</h2>
+        <table class="table table-striped table-bordered" >
             <thead class="table-success">
                 <tr>
-                    <th style="width: 10%;">글번호</th>
-                    <th style="width: 10%;">상 세</th>
-                    <th style="width: 50%;">글제목</th>
-                    <th style="width: 15%;">작성자</th>
-                    <th style="width: 15%;">작성일</th>
+                    <th style="width: 7%;">글번호</th>
+                    <th style="width: 8%;">상세보기</th>
+                    <th style="width: 45%;">글제목</th> 
+                    <th style="width: 12%;">이메일</th>
+                    <th style="width: 12%;">작성일</th>
+                    <th th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" style="width: 8%;">수정</th>
+                    <th th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" style="width: 8%;">삭제</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="board : ${boards}">
-                    <td th:text="${board.boardId}"></td>
+                <tr th:each="board, rowStat : ${boards}">
+                    <td th:text="${rowStat.index+1}"></td>
                     <td>
-						<a th:href="@{/boards/edit/{id}(id=${board.boardId})}" 
-						class="btn btn-primary">
-						상 세
-						</a>
-					</td>
+                        <button type="button" class="btn btn-primary" th:data-bs-toggle="modal" th:data-bs-target="'#modal-' + ${board.boardId}">
+                            상세
+                        </button>
+                    </td>
                     <td th:text="${board.title}"></td>
                     <td th:text="${board.professorEmail}"></td>
                     <td th:text="${board.boardRegistrationDate}"></td>
+                    <td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}">
+                        <a 
+                        th:data-url="@{/boards/edit/{id}(id=${board.boardId})}" 
+                        onclick="loadContent(event)" 
+                        class="btn btn-primary">
+                            수정
+                        </a>
+                    </td>
+                    <td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}">
+                        <button class="btn btn-danger" 
+                        th:attr="data-boardId=${board.boardId}" 
+                        onclick="deleteBoard(this.getAttribute('data-boardId'))">삭제</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <a 
+        th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}"
+        th:data-url="@{/boards/write}" 
+        style="float: right;" 
+        onclick="loadContent(event)" 
+        class="btn btn-primary">
+        게시글 작성
+        </a>
     </div>
-</div>
+
+    <!-- 각 게시판 항목에 대한 모달 창 생성 -->
+    <div th:each="board : ${boards}" style="max-height: 200vh;">
+        <div class="modal fade" th:id="'modal-' + ${board.boardId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: green; color: white;" >
+                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;">	
+							공지사항 보기
+						</h5>
+                    </div>
+                    <div class="modal-body">
+						<table class="table table-bordered">
+						<tbody style="width: 500px; height: 500px;">
+							<tr>
+								<td style="width: 15%; height: 10%;">
+									제목
+								</td>
+                        		<td colspan="3">
+                        			<p th:text="${board.title}"></p>
+                        		</td>
+                        	</tr>
+							<tr>
+								<td style="height: 70%;">
+									내용
+								</td>
+                        		<td colspan="3">
+                        			<p th:text="${board.contents}"></p>
+                        		</td>
+                        	</tr>
+                        	<tr>
+                        		<td style="height: 10%;">
+									이메일
+                        		</td>
+                        		<td>
+									<p th:text="${board.professorEmail}"></p>
+                        		</td>
+                        		
+                        	</tr>
+                        	<tr>
+                        		<td style="height: 10%; text-align: center;">
+                        			작성일
+                        		</td>
+                        		<td>
+                        			<p th:text="${board.boardRegistrationDate}"></p>
+                        		</td>
+                        	</tr>
+
+                        </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+    
+<!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 삭제 기능을 위한 JavaScript -->
+    <script th:inline="javascript">
+        function deleteBoard(boardId) {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/boards/delete/" + boardId,
+                    success: function (response) {
+                        alert(response); // 삭제 성공 시 메시지를 띄움
+                        location.reload(); // 페이지 새로고침
+                    },
+                    error: function (error) {
+                        alert('게시글 삭제 실패');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
 </html>

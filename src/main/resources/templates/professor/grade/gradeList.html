@@ -14,8 +14,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="grade : ${grades}">
-					<td th:text="${grade.gradeId}"></td>
+                <tr th:each="grade, rowStat : ${grades}">
+					<td th:text="${rowStat.index+1}"></td>
 					
 					<td th:if="${session.loggedInProfessor != null and session.loggedInStudent == null}" 
 					th:text="${grade.studentNumber}"></td>
