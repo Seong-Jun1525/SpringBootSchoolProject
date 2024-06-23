@@ -21,8 +21,8 @@
 	            </tr>
 	        </thead>
 	        <tbody>
-	            <tr th:each="student : ${students}">
-	                <td th:text="${student.studentId}">1</td>
+	            <tr th:each="student,rowStat : ${students}">
+	                <td th:text="${rowStat.index+1}">1</td>
 	                <td th:text="${student.studentName}">John Doe</td>
 	                <td th:text="${student.studentNumber}">20230001</td>
 	                <td th:text="${student.studentMajor}">Computer Science</td>

@@ -54,3 +54,26 @@ function loadSearchContent(event) {
         console.error('Error fetching content:', error);
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    const detailButtons = document.querySelectorAll(".detail-btn");
+    const modalBody = document.querySelector(".modal-body");
+
+    detailButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            loadDetailContent(itemId);
+        });
+    });
+
+    function loadDetailContent(itemId) {
+        fetch(`/detail/${itemId}`)
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+                modal.show();
+            })
+            .catch(error => console.error('Error loading detail content:', error));
+    }
+});

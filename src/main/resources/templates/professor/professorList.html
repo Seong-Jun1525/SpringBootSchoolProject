@@ -14,8 +14,8 @@
 	            </tr>
 	        </thead>
 	        <tbody>
-	            <tr th:each="professor : ${professors}">
-	                <td th:text="${professor.professorId}">1</td>
+	            <tr th:each="professor, rowStat : ${professors}">
+	                <td th:text="${rowStat.index+1}">1</td>
 	                <td th:text="${professor.professorName}">John Doe</td>
 	                <td th:text="${professor.professorDept}">Computer Science</td>
 	                <td th:text="${professor.professorEmail}">john.doe@example.com</td>
