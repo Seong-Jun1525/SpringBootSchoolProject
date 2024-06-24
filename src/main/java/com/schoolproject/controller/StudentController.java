@@ -19,34 +19,41 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/students")
 public class StudentController {
 
+	// 서비스 등록
     @Autowired
     private StudentService studentService;
 
+    // 회원가입 페이지
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("student", new Student());
         return "student/studentRegister";
     }
 
+    // 학생등록기능
     @PostMapping("/register")
     public String registerStudent(@ModelAttribute Student student) {
         try {
             studentService.registerStudent(student);
             return "redirect:/";
         } catch (Exception e) {
+        	// 등록된 학번이 없을 경우 예외 처리
         	throw new StudentNotFoundException("Error : " + e.getMessage());
         }
     }
-
+    
+    // 학생회원가입 페이지
     @GetMapping("/update")
     public String showUpdateForm(Model model) {
         model.addAttribute("student", new Student());
         return "student/register";
     }
 
+    // 학생회원가입 기능
     @PostMapping("/update")
     public String updateStudent(@ModelAttribute Student student) {
         try {
+        	// 교수가 먼저 등록한 기본정보에서 추가로 회원개인정보를 등록. 즉, UPDATE
             studentService.updateStudent(student);
             return "redirect:/";
         } catch (Exception e) {
@@ -54,13 +61,14 @@ public class StudentController {
         }
     }
 
+    // 회원목록 페이지
     @GetMapping("/list")
     public String listStudents(Model model) {
         model.addAttribute("students", studentService.findAll());
-        
         return "student/studentList";
     }
     
+    // 로그인 페이지
     @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("student", new Student());
@@ -69,28 +77,22 @@ public class StudentController {
         return "student/studentLogin";
     }
 
+    // 로그인 기능
     @PostMapping("/login")
     public String login(
     		@ModelAttribute("student") Student student,
     		BindingResult bindingResult,
     		Model model,
-    		HttpSession session) 
-    {
-        if (bindingResult.hasErrors()) {
-            throw new StudentNotFoundException("유효성 검사 오류 발생");
-        }
+    		HttpSession session) {
+        if (bindingResult.hasErrors()) throw new StudentNotFoundException("유효성 검사 오류 발생");
         try {
             boolean loginSuccess = studentService.login(student.getStudentEmail(), student.getStudentPw());
             if (loginSuccess) {
-                // 로그인 성공 시 다음 페이지로 리다이렉트 또는 모델에 추가 정보 전달 가능
-                System.out.println(student + " " + student.getStudentEmail());
-                
+                System.out.println(student + " " + student.getStudentEmail()); // TEST
                 String studentEmail = (String) student.getStudentEmail();
                 String studentName = studentService.findBystudentName(studentEmail);
-                
-                
+                // 로그인 성공 시 세션에 저장               
                 session.setAttribute("loggedInStudent", student);
-                // 로그인 성공 시 세션에 이메일 저장               
                 session.setAttribute("loggedInStudentEmail", student.getStudentEmail());
                 session.setAttribute("loggedInStudentName", studentName);
                 session.setAttribute("loggedInStudentNumber", student.getStudentNumber());
@@ -104,6 +106,7 @@ public class StudentController {
         }
     }
     
+    // 로그아웃 기능
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 무효화

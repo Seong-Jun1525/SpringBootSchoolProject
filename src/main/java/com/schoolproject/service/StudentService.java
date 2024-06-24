@@ -20,8 +20,8 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
+    // 학생등록
     public Student registerStudent(Student student) {
-    	
     	generateStudentNumber(student);
     	// 만약 학번이 이미 등록되어 있을 경우
         if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
@@ -31,35 +31,20 @@ public class StudentService {
         /** 
          * 교수가 학생 등록할 때 학생 개인정보는 등록하지 않음
          * 그래서 해당 컬럼들을 기본값으로 DB에 등록
-         *  */
-        if (student.getStudentName() == null) {
-            student.setStudentName("");
-        }
-        if (student.getStudentEmail() == null) {
-            student.setStudentEmail("");
-        }
-        if (student.getStudentPw() == null) {
-            student.setStudentPw("");
-        }
-        if (student.getStudentBirthdate() == null) {
-            student.setStudentBirthdate("");
-        }
-        if (student.getStudentPhone() == null) {
-            student.setStudentPhone("");
-        }
-        if (student.getStudentPoint() == null) {
-            student.setStudentPoint(15);
-        }
-        if (student.getStudentGender() == null) {
-            student.setStudentGender("");
-        }
-        if (student.getStudentRegistrationDate() == null) {
-            student.setStudentRegistrationDate(LocalDate.now());
-        }
+         **/
+        if (student.getStudentName() == null) student.setStudentName("");
+        if (student.getStudentEmail() == null) student.setStudentEmail("");
+        if (student.getStudentPw() == null) student.setStudentPw("");
+        if (student.getStudentBirthdate() == null) student.setStudentBirthdate("");
+        if (student.getStudentPhone() == null) student.setStudentPhone("");
+        if (student.getStudentPoint() == null) student.setStudentPoint(15);
+        if (student.getStudentGender() == null) student.setStudentGender("");
+        if (student.getStudentRegistrationDate() == null) student.setStudentRegistrationDate(LocalDate.now());
         studentRepository.updateAutoIncrementValue();
         return studentRepository.save(student);
     }
 
+    // 학번생성기능
     private void generateStudentNumber(Student student) {
         // 현재 연도 가져오기
         int currentYear = LocalDate.now().getYear();
@@ -87,10 +72,12 @@ public class StudentService {
         }
     }
     
+    // 학생 회원정보 UPDATE로 최종회원가입
     public Student updateStudent(Student student) {
         Optional<Student> existingStudentOpt = studentRepository.findByStudentNumberAndStudentMajor(
                 student.getStudentNumber(), student.getStudentMajor());
 
+        // 등록된 학생이 존재할 경우
         if (existingStudentOpt.isPresent()) {
             Student existingStudent = existingStudentOpt.get();
             existingStudent.setStudentName(student.getStudentName());
@@ -112,7 +99,7 @@ public class StudentService {
     
     public String findBystudentName(String studentEmail) {
         Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
-        System.out.println("StudentOptional의 값 : " + studentOptional.get().getStudentName());
+        System.out.println("StudentOptional의 값 : " + studentOptional.get().getStudentName()); // test
         return studentOptional.get().getStudentName();
 	}
     
@@ -124,9 +111,7 @@ public class StudentService {
         if (studentOptional.isEmpty() || !studentOptional.get().getStudentPw().equals(password)) {
             throw new StudentNotFoundException("이메일 또는 비밀번호가 잘못되었습니다. " + studentOptional);
         }
-
-        // 로그인 성공
-        return true;
+        return true; // 로그인 성공
     }
     
     public Optional<Student> findByEnrolmentStudentInfo(String studentEmail) {
@@ -134,6 +119,4 @@ public class StudentService {
         Optional<Student> studentOptional = studentRepository.findByStudentEmail(studentEmail);
     	return studentOptional;
     }
-
-    
 }

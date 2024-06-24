@@ -18,6 +18,7 @@ public class EnrolmentService {
 		this.enrolmentOneRepository = enrolmentOneRepository;
 	}
 	
+	// 수강신청
 	public Enrolment registerEnrolment(Enrolment enrolment) {
 		// 만약 수강신청을 했을 경우
 		if(enrolmentOneRepository.existsByLectureNameAndStudentNumber(
@@ -37,13 +38,15 @@ public class EnrolmentService {
 		return enrolmentOneRepository.findByLectureName(lectureName);
 	}
 
+	// 마감 이후 포인트 부족 학생 데이터 삭제
 	public void deleteStudent(String lectureName, int enrolmentStudentListSize, int lectureCapacity) {
 		System.out.println("서비스에서 강의목록 체크1 : " + lectureName);
 		System.out.println("서비스에서 강의목록 체크2 : " + enrolmentStudentListSize);
 		System.out.println("서비스에서 강의목록 체크3 : " + lectureCapacity);
 		if (enrolmentStudentListSize > lectureCapacity) {
             int deleteCount = enrolmentStudentListSize - lectureCapacity;
-            List<Enrolment> enrolmentsToDelete = enrolmentOneRepository.findByLectureNameOrderByStudentPointDesc(lectureName);
+            List<Enrolment> enrolmentsToDelete = enrolmentOneRepository.findByLectureNameOrderByStudentPointDesc(
+            		lectureName);
 
             System.out.println(deleteCount);
             System.out.println(lectureCapacity);

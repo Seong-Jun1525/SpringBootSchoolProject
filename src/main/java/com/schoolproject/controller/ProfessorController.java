@@ -63,9 +63,7 @@ public class ProfessorController {
                         BindingResult bindingResult,
                         Model model,
                         HttpSession session) {
-        if (bindingResult.hasErrors()) {
-        	throw new ProfessorLoginException("유효성 검사 오류 발생");
-        }
+        if (bindingResult.hasErrors()) throw new ProfessorLoginException("유효성 검사 오류 발생");
         
         // 입력받은 교수 이메일과 교수 패스워드값 확인
         System.out.println(professor.getProfessorEmail() + " " + professor.getProfessorPw());
@@ -79,8 +77,8 @@ public class ProfessorController {
         		String professorName = professorService.findByProfessorName(professorEmail);
         		System.out.println("이름 : " + professorName);
         		
+        		// 세션에 저장
                 session.setAttribute("loggedInProfessor", professor);
-                // 로그인 성공 시 세션에 이메일 저장
                 session.setAttribute("loggedInProfessorEmail", professor.getProfessorEmail());
                 session.setAttribute("loggedInProfessorName", professorName);
                 return "redirect:/";

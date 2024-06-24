@@ -29,28 +29,8 @@ public class ProfessorService {
 	public List<Professor> findAll() {
         return professorRepository.findAll();
     }
-
-	// 교수 정보 찾기
-//	public List<Professor> findByProfessorInfo(String professorEmail) {
-//        List<Professor> professorInfo = professorRepository.findAll();
-//        System.out.println("professorOptional의 값 : " + professorInfo.get(0));
-//        String professorName = "";
-//        String professorDept = "";
-//        System.out.println(professorInfo.get(1).getProfessorEmail() == professorEmail);
-//        for(int i = 0; i < professorInfo.size(); i++) {
-//        	if(professorInfo.get(i).getProfessorEmail().equals(professorEmail)) {
-//        		professorName = professorInfo.get(i).getProfessorName();
-//        		professorDept = professorInfo.get(i).getProfessorDept();
-//        		break;
-//        	}
-//        }
-//        
-////        List<String> professorInfo = null;
-////        professorInfo.add(0, professorOptional.get().getProfessorName());
-////        professorInfo.add(1, professorOptional.get().getProfessorDept());
-//        return professorRepository.findAll();
-//	}
 	
+	// 교수 로그인
 	public boolean login(String email, String password) throws ProfessorLoginException {
         // 이메일을 통해 교수 정보 가져오기
         Optional<Professor> professorOptional = professorRepository.findByProfessorEmail(email);

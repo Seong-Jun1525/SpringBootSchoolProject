@@ -28,6 +28,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/evaluations")
 public class EvaluationController {
+	// 서비스 등록
 	@Autowired
 	private EvaluationService evaluationService;
 	@Autowired
@@ -43,6 +44,7 @@ public class EvaluationController {
 	        @SessionAttribute("loggedInStudentEmail") String studentEmail,
     		@RequestParam("item") String lectureName) {
         model.addAttribute("evaluation", new Evaluation());
+        
 		// 세션에서 가져온 이메일로 학생정보 찾기
         System.out.println(studentEmail); // 정상적으로 저장되어있는지 콘솔에서 확인
         model.addAttribute("loggedInStudentEmail", studentEmail);
@@ -69,6 +71,7 @@ public class EvaluationController {
 		return "professor/lecture/professorEvaluationList";
 	}
 	
+	// 교수 평가목록 검색기능
 	@PostMapping("/professor/search")
 	public String evaluationSearch(
 			Model model,
@@ -77,7 +80,8 @@ public class EvaluationController {
         List<Evaluation> evaluations = evaluationService.findByEvaluationList(lectureName);
         // TODO 교수명과 학과명으로 evaluation 테이블에서 데이터찾기
         model.addAttribute("evaluations", evaluations);
-		return "professor/lecture/evaluationListResults :: evaluationListResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
+        // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
+		return "professor/lecture/evaluationListResults :: evaluationListResultsFragment";
 	}
 	
 	// 교수평가목록 현황확인
@@ -95,11 +99,14 @@ public class EvaluationController {
 		// 세션에서 가져온 이메일로 학생정보 찾기
         System.out.println(studentEmail); // 정상적으로 저장되어있는지 콘솔에서 확인
         Optional<Student> studentOptional = studentService.findByEnrolmentStudentInfo(studentEmail);
-	    Student student = studentOptional.orElseThrow(() -> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
+	    Student student = studentOptional.orElseThrow(() 
+	    				-> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
 	    
 	    // TODO 수강신청테이블에서 학번데이터로 내가 신청한 수강신청데이터들만 뽑아오기 
 	    int studentNumber = student.getStudentNumber();
 	    session.setAttribute("loggedInStudentNumber", studentNumber);
+	    
+	    // 학번으로 데이터 찾기
 	    List<Enrolment> enrolments = enrolmentService.findByMyEnrolment(studentNumber);
 	    System.out.println(enrolments.size());
 	    List<String> lectureList = new ArrayList<>();

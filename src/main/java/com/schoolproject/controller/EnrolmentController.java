@@ -80,7 +80,9 @@ public class EnrolmentController {
 	    System.out.println("입력받은 값 : " + enrolment.getLectureSemester());
 	    Optional<Student> studentInfo = studentService.findByEnrolmentStudentInfo(studentEmail);
 	    
-	    Student student = studentInfo.orElseThrow(() -> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));;
+	    Student student = studentInfo.orElseThrow(() 
+	    		-> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));;
+	    		
 	    System.out.println(student.getStudentNumber());
 	    int myStudentNumber = student.getStudentNumber();
 	    List<Enrolment> enrolments = enrolmentService.findByMyEnrolment(myStudentNumber);
@@ -103,6 +105,7 @@ public class EnrolmentController {
 		return "student/enrolment/majorsEnrolment";
 	}
 	
+	// 전공수강신청 검색기능
 	@PostMapping("/majorsEnrolment/search")
 	public String searchMajorLectures(
 			@ModelAttribute Lecture lecture,
@@ -127,6 +130,7 @@ public class EnrolmentController {
 	    return "student/enrolment/majorResults :: majorResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
 	}
 	
+	// 전공수강신청기능
 	@GetMapping("/major/register")
 	public String registerMajorEnrolment(
 	        @ModelAttribute Lecture lecture,
@@ -136,32 +140,31 @@ public class EnrolmentController {
 	        @SessionAttribute("loggedInStudentEmail") String studentEmail,
 	        Model model,
 	        HttpSession session) {
-		
 		/* TODO
 		 * 전공수강신청페이지에서 입력한 학과명을 세션으로 저장
-		 * 
 		 * 해당 데이터로 강의테이블에서 lecture_major명이 현재 세션강의명과 일치하는 값을 찾기
 		 */
-		
 		// 세션에 저장한 학과명과 학년을 확인
 		System.out.println("입력받은 학과명 : " + session.getAttribute("inputLectureMajorSession"));
 		System.out.println("입력받은 학년 : " + session.getAttribute("inputLectureGradeSession"));
 		System.out.println("입력받은 분류 : " + session.getAttribute("inputLectureTypeSession"));
-		
 		System.out.println(lectureId);
+		
 		String inputLectureMajorSession = (String) session.getAttribute("inputLectureMajorSession");
 		int inputLectureGradeSession = (int) session.getAttribute("inputLectureGradeSession");
 		String inputLectureTypeSession = (String) session.getAttribute("inputLectureTypeSession");
 		
 		// TODO : 강의ID 가져오기 성공. 강의ID의 값으로 get(0) 부분 수정하고 이어서 수강신청 테이블에 저장할 데이터 정리 후 저장
 		// 학생 메일로 수강신청에 필요한 학생정보 가져오기
-		List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);		
+		List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(
+				inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);		
 		int enrolmentListSize = enrolmentLectureInfo.size();
 		
 		System.out.println("전공 enrolmentListSize " + enrolmentListSize);
 		
 	    Optional<Student> studentOptional = studentService.findByEnrolmentStudentInfo(studentEmail);
-	    Student student = studentOptional.orElseThrow(() -> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
+	    Student student = studentOptional.orElseThrow(() 
+	    		-> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
 	    
 		System.out.println("강의명 : " + lectureName);
 		String studentMajor = student.getStudentMajor();
@@ -184,14 +187,12 @@ public class EnrolmentController {
 	                selectedLecture.getLectureCredit(),
 	                selectedLecture.getLectureType()
 	        );
-        	
         	System.out.println("studentMajor : " + studentMajor);
         	System.out.println("lectureMajor : " + lectureMajor);
         	System.out.println(studentMajor == lectureMajor); // 값은 같지만 참조하는 객체가 다르기때문에 비교연산자로 비교할 시 값은 false
 
         	if(studentMajor.equals(lectureMajor)) {
-            	// 수강신청 등록
-    	        enrolmentService.registerEnrolment(enrolmentMajor);
+    	        enrolmentService.registerEnrolment(enrolmentMajor); // 수강신청 등록
     	        // TODO 등록한 강의의 student_count 값 증가시키기
     	        lectureService.updateLectureStudentCount(lectureName);
     	        return "redirect:/";
@@ -204,13 +205,14 @@ public class EnrolmentController {
 	    }
 	}
 	
-	// 교양
+	// 교양 수강신청
 	@GetMapping("/liberalArtsEnrolment")
 	public String showLiberalArtsEnrolment(Model model) {
 		model.addAttribute("lecture", new Lecture()); // 새로운 Lecture 객체를 모델에 추가
 		return "student/enrolment/liberalArtsEnrolment";
 	}
 	
+	// 교양 수강신청 검색기능
 	@PostMapping("/liberalArtsEnrolment/search")
 	public String searchliberalArtsLectures(
 			@ModelAttribute Lecture lecture,
@@ -228,15 +230,18 @@ public class EnrolmentController {
 	    List<Lecture> lectures = lectureService.findByEnrolmentLecture(lecture);
 	    System.out.println("강의 갯수 : " + lectures.size());
 	    model.addAttribute("lectures", lectures);
-	    return "student/enrolment/liberalArtsResults :: liberalArtsResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
+	    // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
+	    return "student/enrolment/liberalArtsResults :: liberalArtsResultsFragment";
 	}
 	
+	// 교양 수강신청
 	@GetMapping("/liberalArts/register")
 	public String registerLiberalArtsEnrolment(Model model) {
 		model.addAttribute("lecture", new Lecture()); // 새로운 Lecture 객체를 모델에 추가
 	    return "student/enrolment/liberalArtsEnrolment";
 	}
 
+	// 교양 수강신청 기능
 	@PostMapping("/liberalArts/register")
 	public String registerLiberalArtsEnrolment(
 	        @RequestParam("lectureId") int lectureId,
@@ -245,18 +250,19 @@ public class EnrolmentController {
 	        @SessionAttribute("loggedInStudentEmail") String studentEmail,
 	        Model model,
 	        HttpSession session) {
-
 	    // 세션 값 가져오기
 	    String inputLectureMajorSession = (String) session.getAttribute("inputLectureMajorSession");
 	    int inputLectureGradeSession = (int) session.getAttribute("inputLectureGradeSession");
 	    String inputLectureTypeSession = (String) session.getAttribute("inputLectureTypeSession");
 
 	    // 학생 메일로 수강신청에 필요한 학생정보 가져오기
-	    List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);
+	    List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(
+	    		inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);
 	    int enrolmentListSize = enrolmentLectureInfo.size();
 	    System.out.println("교양 enrolmentListSize " + enrolmentListSize);
 	    Optional<Student> studentOptional = studentService.findByEnrolmentStudentInfo(studentEmail);
-	    Student student = studentOptional.orElseThrow(() -> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
+	    Student student = studentOptional.orElseThrow(() 
+	    		-> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
 	    
 	    try {
 	        System.out.println("학생메일: " + studentEmail);
@@ -301,10 +307,8 @@ public class EnrolmentController {
 		        student.setStudentPoint(student.getStudentPoint()-bettingPoints);
 		        enrolmentService.registerEnrolment(enrolmentLiberalArt);
 	        }
-	        else {
-		        throw new StudentPointException("포인트가 부족합니다.");
-	        }
-
+	        else throw new StudentPointException("포인트가 부족합니다."); 
+	        
 	        // TODO 등록한 강의의 student_count 값 증가시키기
 	        lectureService.updateLectureStudentCount(lectureName);
 	        return "redirect:/"; // 성공적으로 수강신청 후 메인 페이지로 리다이렉트
@@ -348,7 +352,7 @@ public class EnrolmentController {
     	}
         
     }
-	
+	// 교양 수강신청 마감 기능
 	@PostMapping("/professor/deadline")
     public String deadlineRegistration(@RequestParam("lectureName") String lectureName, Enrolment enrolment) {
         lectureService.updateLectureDeadline(lectureName, 1); // deadline 값 1로 변경해서 수강신청 마감
@@ -365,7 +369,6 @@ public class EnrolmentController {
         return "redirect:/";
     }
 
-	
 	// 추가수강신청
 	@GetMapping("/secondEnrolment")
 	public String showSecondEnrolment(Model model) {
@@ -373,6 +376,7 @@ public class EnrolmentController {
 		return "student/enrolment/secondEnrolment";
 	}
 	
+	// 추가수강신청 검색 기능
 	@PostMapping("/secondEnrolment/search")
 	public String searchSecondLectures(
 			@ModelAttribute Lecture lecture,
@@ -393,6 +397,7 @@ public class EnrolmentController {
 	    return "student/enrolment/secondResults :: secondResultsFragment"; // 검색 결과를 보여줄 템플릿 이름과 fragment 지정
 	}
 
+	// 추가수강신청 기능
 	@GetMapping("/secondEnrolment/register")
 	public String registerSecondEnrolment(
 	        @RequestParam("lectureId") int lectureId,
@@ -406,11 +411,13 @@ public class EnrolmentController {
 	    String inputLectureTypeSession = (String) session.getAttribute("inputLectureTypeSession");
 
 	    // 학생 메일로 수강신청에 필요한 학생정보 가져오기
-	    List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);
+	    List<Lecture> enrolmentLectureInfo = lectureService.findByLectureMajorAndLectureGrade(
+	    		inputLectureMajorSession, inputLectureGradeSession, inputLectureTypeSession);
 	    int enrolmentListSize = enrolmentLectureInfo.size();
 	    System.out.println("교양 enrolmentListSize " + enrolmentListSize);
 	    Optional<Student> studentOptional = studentService.findByEnrolmentStudentInfo(studentEmail);
-	    Student student = studentOptional.orElseThrow(() -> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
+	    Student student = studentOptional.orElseThrow(() 
+	    		-> new StudentNotFoundException("학생 정보를 찾을 수 없습니다: " + studentEmail));
 	    
 	    try {
 	        System.out.println("학생메일: " + studentEmail);

@@ -14,8 +14,11 @@ import jakarta.transaction.Transactional;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     
 	boolean existsByStudentNumber(Integer studentNumber);
+	
+	// 학번과 학과명으로 데이터 찾기
     Optional<Student> findByStudentNumberAndStudentMajor(Integer studentNumber, String studentMajor);
-    
+
+	// 학생이메일로 데이터 찾기
     Optional<Student> findByStudentEmail(String email);
 
     Student findByStudentNumber(int studentNumber);
@@ -30,4 +33,3 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     String findByStudentName(String StudentEmail);
     
 }
-

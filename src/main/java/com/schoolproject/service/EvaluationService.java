@@ -24,8 +24,9 @@ public class EvaluationService {
         return evaluationRepository.findByStudentNumber(studentNumber);
 	}
 
+	// 강의평가 등록
 	public Evaluation registerEvaluation(Evaluation evaluation) {
-		System.out.println(evaluation.getLectureName());
+		System.out.println(evaluation.getLectureName()); // 강의명 체크
 		
 		// 만약 학번이 이미 등록되어 있을 경우
 		if (evaluationRepository.existsByEvaluationId(evaluation.getEvaluationId())) {
