@@ -57,7 +57,7 @@ _~~동일포인트점수일 경우에는 선착순 입니다. 그렇기 때문�
 ## 💻 개발환경 및 기술스택
 <h4>개발환경</h4>
 <div>
-	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual Studio Code&logoColor=white" />
+    <img src="https://img.shields.io/badge/Visual_Studio_Code-%23007ACC?style=flat&logo=visualstudiocode&logoColor=white" />
     <img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white" />
 </div>
 
@@ -70,7 +70,7 @@ _~~동일포인트점수일 경우에는 선착순 입니다. 그렇기 때문�
 
 <h4>BackEnd</h4>
 <div>
-	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=Spring Boot&logoColor=white" />
+	<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=springboot&logoColor=white" />
 	<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
 </div>
 
